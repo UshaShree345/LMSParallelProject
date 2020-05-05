@@ -1,0 +1,5 @@
+package com.capgemini.lmscollection.dao;
+
+public class LibrarianDAOImplementation {
+
+}

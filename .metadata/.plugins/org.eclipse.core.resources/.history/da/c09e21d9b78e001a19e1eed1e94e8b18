@@ -1,0 +1,5 @@
+package com.capgemini.lmscollection.dto;
+
+public class StudentInfo {
+
+}

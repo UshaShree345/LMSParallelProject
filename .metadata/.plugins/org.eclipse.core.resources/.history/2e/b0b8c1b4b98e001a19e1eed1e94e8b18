@@ -1,0 +1,5 @@
+package com.capgemini.lmsjdbc.utility;
+
+public class JdbcUtility {
+
+}

@@ -1,0 +1,5 @@
+package com.capgemini.lmsjdbc.factory;
+
+public class Factory {
+
+}

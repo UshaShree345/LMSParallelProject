@@ -1,0 +1,5 @@
+package com.capgemini.lmsjdbc.dto;
+
+public class BookBean {
+
+}

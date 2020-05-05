@@ -1,0 +1,5 @@
+package com.capgemini.lmsjdbc.validation;
+
+public class Validation {
+
+}

@@ -1,0 +1,16 @@
+package com.capgemini.librarymanagementsystem.db;
+
+import java.util.ArrayList;
+
+import com.capgemini.librarymanagementsystem.dto.LibrarianInfo;
+import com.capgemini.librarymanagementsystem.dto.BooksInfo;
+import com.capgemini.librarymanagementsystem.dto.RequestInfo;
+import com.capgemini.librarymanagementsystem.dto.StudentInfo;
+
+public class LibraryDB {
+	
+	public static final ArrayList<BooksInfo> BOOKS=new ArrayList<BooksInfo>();
+	public static final ArrayList<StudentInfo> STUDENT=new ArrayList<StudentInfo>();
+	public static final ArrayList<LibrarianInfo> LIBRARIAN=new ArrayList<LibrarianInfo>();
+	public static final ArrayList<RequestInfo> REQUEST = new ArrayList<RequestInfo>();
+}

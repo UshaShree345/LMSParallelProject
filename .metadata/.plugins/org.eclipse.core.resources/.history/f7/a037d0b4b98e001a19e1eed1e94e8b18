@@ -1,0 +1,5 @@
+package com.capgemini.lmsjdbc.service;
+
+public interface StudentService {
+
+}

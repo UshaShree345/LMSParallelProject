@@ -1,0 +1,5 @@
+package com.capgemini.lmscollection.service;
+
+public class LibrarianService {
+
+}

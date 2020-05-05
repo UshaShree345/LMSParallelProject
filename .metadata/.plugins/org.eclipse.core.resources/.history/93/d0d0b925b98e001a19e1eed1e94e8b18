@@ -1,0 +1,5 @@
+package com.capgemini.lmsjdbc.dao;
+
+public interface QueryMapper {
+
+}
