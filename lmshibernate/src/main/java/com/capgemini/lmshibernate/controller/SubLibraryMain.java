@@ -592,7 +592,6 @@ public class SubLibraryMain {
 																System.out.println(String.format("%-5s %-5s %-5s %s",
 																		BookInfo.getId(), BookInfo.getUserId(),
 																		BookInfo.getBookId(), BookInfo.getBookName()));
-
 															} else {
 																System.out.println(
 																		"-----------------------------------------------");
