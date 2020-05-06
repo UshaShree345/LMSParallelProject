@@ -3,7 +3,7 @@ package com.capgemini.lmsjdbc.dto;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class RequestsInfo implements Serializable {
+public class BookRequestInfo implements Serializable {
 	
 	private int sId;
 	private String fullName;

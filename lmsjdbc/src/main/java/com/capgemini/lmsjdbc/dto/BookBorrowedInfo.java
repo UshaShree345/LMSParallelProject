@@ -3,7 +3,7 @@ package com.capgemini.lmsjdbc.dto;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class BorrowedBooksInfo implements Serializable {
+public class BookBorrowedInfo implements Serializable {
 	
 	private int sId;
 	private int bId;

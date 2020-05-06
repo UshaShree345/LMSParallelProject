@@ -12,8 +12,8 @@ import java.util.List;
 
 import com.capgemini.lmsjdbc.dto.BookInfo;
 import com.capgemini.lmsjdbc.dto.BookIssueInfo;
-import com.capgemini.lmsjdbc.dto.BorrowedBooksInfo;
-import com.capgemini.lmsjdbc.dto.RequestsInfo;
+import com.capgemini.lmsjdbc.dto.BookBorrowedInfo;
+import com.capgemini.lmsjdbc.dto.BookRequestInfo;
 import com.capgemini.lmsjdbc.dto.UserInfo;
 import com.capgemini.lmsjdbc.exception.LMSException;
 import com.capgemini.lmsjdbc.utility.JdbcUtility;
@@ -347,16 +347,16 @@ public class UserDAOImplementation implements UserDAO {
 	}
 
 	@Override
-	public List<BorrowedBooksInfo> borrowedBook(int sId) {
+	public List<BookBorrowedInfo> borrowedBook(int sId) {
 
 		connection = JdbcUtility.getConnection();
 
 		try (PreparedStatement statement = connection.prepareStatement(QueryMapper.borrowQuery);) {
 			statement.setInt(1, sId);
 			rs = statement.executeQuery();
-			ArrayList<BorrowedBooksInfo> beans = new ArrayList<BorrowedBooksInfo>();
+			ArrayList<BookBorrowedInfo> beans = new ArrayList<BookBorrowedInfo>();
 			while (rs.next()) {
-				BorrowedBooksInfo listOfbooksBorrowed = new BorrowedBooksInfo();
+				BookBorrowedInfo listOfbooksBorrowed = new BookBorrowedInfo();
 				listOfbooksBorrowed.setsId(rs.getInt("sId"));
 				listOfbooksBorrowed.setbId(rs.getInt("bId"));
 				listOfbooksBorrowed.setEmail(rs.getString("email"));
@@ -488,15 +488,15 @@ public class UserDAOImplementation implements UserDAO {
 	}
 
 	@Override
-	public ArrayList<RequestsInfo> showRequests() {
+	public ArrayList<BookRequestInfo> showRequests() {
 
 		connection = JdbcUtility.getConnection();
 
 		try (Statement stmt = (Statement) connection.createStatement();
 				ResultSet rs = stmt.executeQuery(QueryMapper.showRequestsQuery);) {
-			ArrayList<RequestsInfo> beans = new ArrayList<RequestsInfo>();
+			ArrayList<BookRequestInfo> beans = new ArrayList<BookRequestInfo>();
 			while (rs.next()) {
-				RequestsInfo bean = new RequestsInfo();
+				BookRequestInfo bean = new BookRequestInfo();
 				bean.setsId(rs.getInt("sId"));
 				bean.setFullName(rs.getString("fullName"));
 				bean.setbId(rs.getInt("bId"));

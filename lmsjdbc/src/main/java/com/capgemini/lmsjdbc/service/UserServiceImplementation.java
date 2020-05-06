@@ -6,8 +6,8 @@ import java.util.List;
 import com.capgemini.lmsjdbc.dao.UserDAO;
 import com.capgemini.lmsjdbc.dto.BookInfo;
 import com.capgemini.lmsjdbc.dto.BookIssueInfo;
-import com.capgemini.lmsjdbc.dto.BorrowedBooksInfo;
-import com.capgemini.lmsjdbc.dto.RequestsInfo;
+import com.capgemini.lmsjdbc.dto.BookBorrowedInfo;
+import com.capgemini.lmsjdbc.dto.BookRequestInfo;
 import com.capgemini.lmsjdbc.dto.UserInfo;
 import com.capgemini.lmsjdbc.factory.Factory;
 
@@ -71,7 +71,7 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public List<BorrowedBooksInfo> borrowedBook(int sId) {
+	public List<BookBorrowedInfo> borrowedBook(int sId) {
 		return dao.borrowedBook(sId);
 	}
 
@@ -86,7 +86,7 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public ArrayList<RequestsInfo> showRequests() {
+	public ArrayList<BookRequestInfo> showRequests() {
 		return dao.showRequests();
 	}
 

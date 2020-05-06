@@ -7,35 +7,35 @@ import java.util.Scanner;
 
 import com.capgemini.lmsjdbc.dto.BookInfo;
 import com.capgemini.lmsjdbc.dto.BookIssueInfo;
-import com.capgemini.lmsjdbc.dto.BorrowedBooksInfo;
-import com.capgemini.lmsjdbc.dto.RequestsInfo;
+import com.capgemini.lmsjdbc.dto.BookBorrowedInfo;
+import com.capgemini.lmsjdbc.dto.BookRequestInfo;
 import com.capgemini.lmsjdbc.dto.UserInfo;
 import com.capgemini.lmsjdbc.exception.LMSException;
 import com.capgemini.lmsjdbc.factory.Factory;
 import com.capgemini.lmsjdbc.service.UserService;
 import com.capgemini.lmsjdbc.validation.Validation;
 
-public class MainClass {
+public class SubLibraryMain {
     
-	public static void doReg() {
+	public static void LibraryOperations() {
 		
 		boolean flag = false;
-		int regId = 0; 
-		String regFirstName = null; 
-		String regLastName = null; 
-		long regMobile = 0;
-		String regEmail = null;
-		String regPassword = null;
-		String regRole = null;
-		boolean loginStatus = true;
+		int checkId = 0; 
+		String checkFirstName = null; 
+		String checkLastName = null; 
+		long checkMobile = 0;
+		String checkEmail = null;
+		String checkPassword = null;
+		String checkRole = null;
+		boolean checkStatus = true;
 		
 		Validation validation = new Validation();
 		do {
 			try (Scanner scanner = new Scanner(System.in);) {
 				System.out.println("<----------------------->");
-				System.out.println("PRESS-1 TO REGISTER");
-				System.out.println("PRESS-2 TO LOGIN");
-				System.out.println("PRESS-3 TO EXIT");
+				System.out.println("[1] REGISTER");
+				System.out.println("[2] LOGIN");
+				System.out.println("[3] EXIT");
 				System.out.println("<----------------------->");
 				do {
 					try {
@@ -47,8 +47,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter ID to register : ");
-									regId = scanner.nextInt();
-									validation.validatedId(regId);
+									checkId = scanner.nextInt();
+									validation.validatedId(checkId);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -62,8 +62,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter First Name : ");
-									regFirstName = scanner.next();
-									validation.validatedName(regFirstName);
+									checkFirstName = scanner.next();
+									validation.validatedName(checkFirstName);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -77,8 +77,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter Last Name : ");
-									regLastName = scanner.next();
-									validation.validatedName(regLastName);
+									checkLastName = scanner.next();
+									validation.validatedName(checkLastName);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -92,8 +92,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter Email  : ");
-									regEmail = scanner.next();
-									validation.validatedEmail(regEmail);
+									checkEmail = scanner.next();
+									validation.validatedEmail(checkEmail);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -107,8 +107,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter Password :");
-									regPassword = scanner.next();
-									validation.validatedPassword(regPassword);
+									checkPassword = scanner.next();
+									validation.validatedPassword(checkPassword);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -116,17 +116,14 @@ public class MainClass {
 								} catch (LMSException e) {
 									flag = false;
 									System.err.println(e.getMessage());
-								} //catch (javax.xml.bind.LMSException e) {
-									// TODO Auto-generated catch block
-								//	e.printStackTrace();
-								//}
+								} 
 							} while (!flag);
 
 							do {
 								try {
 									System.out.println("Enter MobileNumber : ");
-									regMobile = scanner.nextLong();
-									validation.validatedMobile(regMobile);
+									checkMobile = scanner.nextLong();
+									validation.validatedMobile(checkMobile);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -140,8 +137,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter Role :");
-									regRole = scanner.next();
-									validation.validatedRole(regRole);
+									checkRole = scanner.next();
+									validation.validatedRole(checkRole);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -153,17 +150,17 @@ public class MainClass {
 							} while (!flag);
 							
 							UserInfo ai = new UserInfo();
-							ai.setSId(regId);
-							ai.setFirstName(regFirstName);
-							ai.setLastName(regLastName);
-							ai.setEmail(regEmail);
-							ai.setPassword(regPassword);
-							ai.setMobile(regMobile);
-							ai.setRole(regRole);
+							ai.setSId(checkId);
+							ai.setFirstName(checkFirstName);
+							ai.setLastName(checkLastName);
+							ai.setEmail(checkEmail);
+							ai.setPassword(checkPassword);
+							ai.setMobile(checkMobile);
+							ai.setRole(checkRole);
 							try {
 								boolean check=service1.register(ai);
 								if(check) {
-									System.out.println("Registered");
+									System.out.println("You have registered Successfully");
 								}else {
 									System.out.println("Already user is registered");
 								}
@@ -180,26 +177,27 @@ public class MainClass {
 							try {
 								UserInfo loginInfo = service1.login(email, password);
 								if ((loginInfo.getEmail().equals(email)) && (loginInfo.getPassword().equals(password))) {
-									System.out.println("LOGGED IN SUCCESSFULLY");
-								}
+								System.out.println("You have logged in successfully");
+								System.out.println("Now you can perform the following operations:-");
+                                }
 								if(loginInfo.getRole().equals("librarian")) {
 									do {
 										try {
 											System.out.println("-----------------------------------------------");
-											System.out.println("PRESS-1 TO ADD BOOKS");
-											System.out.println("PRESS-2 TO REMOVE THE BOOK");
-											System.out.println("PRESS-3 TO ISSUE BOOK");
-											System.out.println("PRESS-4 TO SEARCH BOOK BY AUTHOR");
-											System.out.println("PRESS-5 TO SEARCH BOOK BY TITLE");
-											System.out.println("PRESS-6 TO GET INFO ABOUT ALL BOOKS");
-											System.out.println("PRESS-7 TO SEARCH BOOK BY ID");
-											System.out.println("PRESS-8 TO UPDATE THE BOOK");
-											System.out.println("PRESS-9 TO CHECK BOOK HISTROY OF STUDENT");
-											System.out.println("PRESS-10 TO VIEW REQUESTS");
-											System.out.println("PRESS-11 TO CHECK THE ISSUED BOOKS");
-											System.out.println("PRESS-12 TO VIEW STUDENTS");
-											System.out.println("PRESS-13 TO UPDATE THE PASSWORD");
-											System.out.println("PRESS-14 TO LOGOUT");
+											System.out.println("[1]  ADD BOOK");
+											System.out.println("[2]  REMOVE BOOK");
+											System.out.println("[3]  ISSUE BOOK");
+											System.out.println("[4]  SEARCH BOOK BY AUTHOR NAME");
+											System.out.println("[5]  SEARCH BOOK BY BOOK TITLE");
+											System.out.println("[6]  VIEW ALL BOOKS");
+											System.out.println("[7]  SEARCH BOOK BY BOOK ID");
+											System.out.println("[8]  UPDATE BOOK");
+											System.out.println("[9]  BOOK HISTROY OF STUDENT");
+											System.out.println("[10] VIEW ALL REQUESTS");
+											System.out.println("[11] CHECK ISSUED BOOKS");
+											System.out.println("[12] VIEW ALL STUDENTS");
+											System.out.println("[13] UPDATE PASSWORD");
+											System.out.println("[14] LOGOUT");
 
 											int choice1 = scanner.nextInt();
 											switch (choice1) {
@@ -398,13 +396,13 @@ public class MainClass {
 											case 10:
 												System.out.println(" Requests received are : ");
 												try {
-													List<RequestsInfo> requests = service1.showRequests();
+													List<BookRequestInfo> requests = service1.showRequests();
 													System.out.println(
 															"<--------------------------------------------------------------------->");
 													System.out.println(String.format("%-10s %-10s %-10s %s", "UserId",
 															"UserName", "BookId", "BookName"));
 													
-													for (RequestsInfo requestBean : requests) {	
+													for (BookRequestInfo requestBean : requests) {	
 														if (requestBean != null) {
 															System.out.println(requestBean.toString());
 														} else {
@@ -479,7 +477,7 @@ public class MainClass {
 												break;
 
 											case 14:
-												doReg();
+												LibraryOperations();
 
 											default:
 												System.out.println("<----------------------------------->");
@@ -496,15 +494,15 @@ public class MainClass {
 									do {
 										try {
 											System.out.println("<------------------------------------------>");
-											System.out.println("PRESS-1 TO REQUEST THE BOOK");
-											System.out.println("PRESS-2 TO VIEW THE BOOKS BORROWED");
-											System.out.println("PRESS-3 TO SEARCH BOOK BY AUTHOR");
-											System.out.println("PRESS-4 TO SEARCH BOOK BY TITLE");
-											System.out.println("PRESS-5 TO SEARCH BOOK BY ID");
-											System.out.println("PRESS-6 TO GET INFO ABOUT ALL BOOKS");
-											System.out.println("PRESS-7 TO RETURN THE BOOK");
-											System.out.println("PRESS-8 TO UPDATE THE PASSWORD");
-											System.out.println("PRESS-9 TO RETURN BACK TO MAIN");
+											System.out.println("[1]  REQUEST BOOK");
+											System.out.println("[2]  VIEW ALL BORROWED BOOKS");
+											System.out.println("[3]  SEARCH BOOK BY AUTHOR NAME");
+											System.out.println("[4]  SEARCH BOOK BY BOOK TITLE");
+											System.out.println("[5]  SEARCH BOOK BY BOOK ID");
+											System.out.println("[6]  VIEW ALL BOOKS");
+											System.out.println("[7]  RETURN BOOK");
+											System.out.println("[8]  UPDATE PASSWORD");
+											System.out.println("[9]  LOGOUT");
 
 											int choice2 = scanner.nextInt();
 											switch (choice2) {
@@ -536,12 +534,12 @@ public class MainClass {
 												int student_Id = scanner.nextInt();
 												try {
 													if(loginInfo.getSId() == student_Id) {
-														List<BorrowedBooksInfo> borrowedBookList = service1.borrowedBook(student_Id);
+														List<BookBorrowedInfo> borrowedBookList = service1.borrowedBook(student_Id);
 														System.out.println(
 																"<--------------------------------------------------------------------->");
 														System.out.println(String.format("%-10s %-10s %s", "UserId",
 																"BookId", "EmailId"));
-														for (BorrowedBooksInfo BookInfo : borrowedBookList) {
+														for (BookBorrowedInfo BookInfo : borrowedBookList) {
 															if (BookInfo != null) {
 																System.out.println(BookInfo.toString());
 															} else {
@@ -688,7 +686,7 @@ public class MainClass {
 												break;
 
 											case 9:
-												doReg();
+												LibraryOperations();
 												
 											default:
 												break;
@@ -717,7 +715,7 @@ public class MainClass {
 					}
 				} while (true);
 			}
-		} while (loginStatus);
+		} while (checkStatus);
 	}
 }
 
