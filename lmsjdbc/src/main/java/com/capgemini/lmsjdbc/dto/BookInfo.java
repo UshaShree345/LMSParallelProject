@@ -1,7 +1,10 @@
 package com.capgemini.lmsjdbc.dto;
 
-public class BookBean {
+import javax.annotation.Generated;
+
+public class BookInfo {
 	
+	@Generated(value = { "bId" })
 	private int bId;
 	private String bookName;
 	private String author;
@@ -37,5 +40,10 @@ public class BookBean {
 	}
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%-10s %-10s %-13s %-15s %s", bId, bookName, author, category, publisher);
 	}	
 }

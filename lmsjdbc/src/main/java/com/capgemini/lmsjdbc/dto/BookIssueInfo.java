@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public class BookIssueDetails implements Serializable {
+public class BookIssueInfo implements Serializable {
 	
 	private int bookId;
-	private int studentId;
+	private int userId;
 	private Date issueDate;
 	private Date returnDate;
 	
@@ -17,11 +17,11 @@ public class BookIssueDetails implements Serializable {
 	public void setBookId(int bookId) {
 		this.bookId = bookId;
 	}
-	public int getStudentId() {
-		return studentId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public Date getIssueDate() {
 		return issueDate;
@@ -34,5 +34,12 @@ public class BookIssueDetails implements Serializable {
 	}
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
-	}	
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%-10s %-10s %-10s %s", bookId, userId, issueDate, returnDate); 
+	}
+	
+	
 }

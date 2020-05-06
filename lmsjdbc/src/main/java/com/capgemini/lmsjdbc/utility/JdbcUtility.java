@@ -9,13 +9,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.capgemini.lmsjdbc.exception.CommonException;
+import com.capgemini.lmsjdbc.exception.LMSException;
 
 public class JdbcUtility {
 
 	private static Connection connection = null;
 	
-	public static Connection getConnection() throws CommonException {
+	public static Connection getConnection() throws LMSException {
 		
 		File file = null;
 		FileInputStream inputStream = null;
@@ -36,18 +36,18 @@ public class JdbcUtility {
 			connection = DriverManager.getConnection(dburl, user, password);
 			
 		} catch (FileNotFoundException e) {
-			throw new CommonException("File not exists");
+			throw new LMSException("File not exists");
 		} catch (IOException e) {
-			throw new CommonException("Unable to read the data from the file");
+			throw new LMSException("Unable to read the data from the file");
 		} catch (ClassNotFoundException e) {
-			throw new CommonException("Class not loaded");
+			throw new LMSException("Class not loaded");
 		} catch (SQLException e) {
-			throw new CommonException("Connection issue");
+			throw new LMSException("Connection issue");
 		} finally {
 			try {
 				inputStream.close();
 			} catch (IOException e) {
-				throw new CommonException("Unable to close the file");
+				throw new LMSException("Unable to close the file");
 			}
 			}
 			return connection;

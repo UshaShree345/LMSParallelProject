@@ -1,17 +1,17 @@
 package com.capgemini.lmsjdbc.factory;
 
-import com.capgemini.lmsjdbc.dao.StudentDAO;
-import com.capgemini.lmsjdbc.dao.StudentDAOImplementation;
-import com.capgemini.lmsjdbc.service.StudentService;
-import com.capgemini.lmsjdbc.service.StudentServiceImplementation;
+import com.capgemini.lmsjdbc.dao.UserDAO;
+import com.capgemini.lmsjdbc.dao.UserDAOImplementation;
+import com.capgemini.lmsjdbc.service.UserService;
+import com.capgemini.lmsjdbc.service.UserServiceImplementation;
 
 public class Factory {
 	
-	public static StudentDAO getStudentDAO() {
-		return new StudentDAOImplementation();
+	public static UserDAO getUserDAO() {
+		return new UserDAOImplementation();
 	}
 	
-	public static StudentService getStudentService() {
-		return new StudentServiceImplementation();
+	public static UserService getUserService() {
+		return new UserServiceImplementation();
 	}
 }

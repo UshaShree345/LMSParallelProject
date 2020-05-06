@@ -3,7 +3,7 @@ package com.capgemini.lmsjdbc.dto;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class RequestDetails implements Serializable {
+public class RequestsInfo implements Serializable {
 	
 	private int sId;
 	private String fullName;
@@ -34,4 +34,10 @@ public class RequestDetails implements Serializable {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
+	@Override
+	public String toString() {
+		return String.format("%-10s %-10s %-10s %s", sId, fullName, bId, bookName); 
+	}
+	
+	
 }

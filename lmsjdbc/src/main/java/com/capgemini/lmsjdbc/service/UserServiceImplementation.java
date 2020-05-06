@@ -1,32 +1,32 @@
 package com.capgemini.lmsjdbc.service;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.capgemini.lmsjdbc.dao.StudentDAO;
-import com.capgemini.lmsjdbc.dto.BookBean;
-import com.capgemini.lmsjdbc.dto.BookIssueDetails;
-import com.capgemini.lmsjdbc.dto.BorrowedBooks;
-import com.capgemini.lmsjdbc.dto.RequestDetails;
-import com.capgemini.lmsjdbc.dto.StudentsBean;
+import com.capgemini.lmsjdbc.dao.UserDAO;
+import com.capgemini.lmsjdbc.dto.BookInfo;
+import com.capgemini.lmsjdbc.dto.BookIssueInfo;
+import com.capgemini.lmsjdbc.dto.BorrowedBooksInfo;
+import com.capgemini.lmsjdbc.dto.RequestsInfo;
+import com.capgemini.lmsjdbc.dto.UserInfo;
 import com.capgemini.lmsjdbc.factory.Factory;
 
-public class StudentServiceImplementation implements StudentService{
+public class UserServiceImplementation implements UserService{
 	
-	private StudentDAO dao=Factory.getStudentDAO();
+	private UserDAO dao=Factory.getUserDAO();
 	
 	@Override
-	public boolean register(StudentsBean student) {
-		return dao.register(student);
+	public boolean register(UserInfo user) {
+		return dao.register(user);
 	}
 
 	@Override
-	public StudentsBean login(String email, String password) {
+	public UserInfo login(String email, String password) {
 		return dao.login(email, password);
 	}
 
 	@Override
-	public boolean addBook(BookBean book) {
+	public boolean addBook(BookInfo book) {
 		return dao.addBook(book);
 	}
 
@@ -36,7 +36,7 @@ public class StudentServiceImplementation implements StudentService{
 	}
 
 	@Override
-	public boolean updateBook(BookBean book) {
+	public boolean updateBook(BookInfo book) {
 		return dao.updateBook(book);
 	}
 
@@ -51,32 +51,32 @@ public class StudentServiceImplementation implements StudentService{
 	}
 
 	@Override
-	public LinkedList<BookBean> searchBookByTitle(String bookName) {
+	public ArrayList<BookInfo> searchBookByTitle(String bookName) {
 		return dao.searchBookByTitle(bookName);
 	}
 
 	@Override
-	public LinkedList<BookBean> searchBookByAuthor(String author) {
+	public ArrayList<BookInfo> searchBookByAuthor(String author) {
 		return dao.searchBookByAuthor(author);
 	}
 
 	@Override
-	public LinkedList<BookBean> getBooksInfo() {
+	public ArrayList<BookInfo> getBooksInfo() {
 		return dao.getBooksInfo();
 	}
 
 	@Override
-	public LinkedList<BookIssueDetails> bookHistoryDetails(int sId) {
+	public ArrayList<BookIssueInfo> bookHistoryDetails(int sId) {
 		return dao.bookHistoryDetails(sId);
 	}
 
 	@Override
-	public List<BorrowedBooks> borrowedBook(int sId) {
+	public List<BorrowedBooksInfo> borrowedBook(int sId) {
 		return dao.borrowedBook(sId);
 	}
 
 	@Override
-	public LinkedList<BookBean> searchBookById(int bId) {
+	public ArrayList<BookInfo> searchBookById(int bId) {
 		return dao.searchBookById(bId);
 	}
 
@@ -86,18 +86,18 @@ public class StudentServiceImplementation implements StudentService{
 	}
 
 	@Override
-	public LinkedList<RequestDetails> showRequests() {
+	public ArrayList<RequestsInfo> showRequests() {
 		return dao.showRequests();
 	}
 
 	@Override
-	public LinkedList<BookIssueDetails> showIssuedBooks() {
+	public ArrayList<BookIssueInfo> showIssuedBooks() {
 		return dao.showIssuedBooks();
 	}
 
 	@Override
-	public LinkedList<StudentsBean> showStudents() {
-		return dao.showStudents();
+	public ArrayList<UserInfo> showUsers() {
+		return dao.showUsers();
 	}
 
 	@Override
