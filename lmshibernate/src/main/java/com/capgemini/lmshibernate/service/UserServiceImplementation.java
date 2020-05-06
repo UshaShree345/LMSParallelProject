@@ -6,7 +6,7 @@ import com.capgemini.lmshibernate.dao.UserDAO;
 import com.capgemini.lmshibernate.dto.BookInfo;
 import com.capgemini.lmshibernate.dto.BookIssueInfo;
 import com.capgemini.lmshibernate.dto.BookBorrowedInfo;
-import com.capgemini.lmshibernate.dto.RequestsInfo;
+import com.capgemini.lmshibernate.dto.BookRequestInfo;
 import com.capgemini.lmshibernate.dto.UserInfo;
 import com.capgemini.lmshibernate.factory.Factory;
 
@@ -30,8 +30,8 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public boolean removeBook(int bId) {
-		return dao.removeBook(bId);
+	public boolean removeBook(int bookId) {
+		return dao.removeBook(bookId);
 	}
 
 	@Override
@@ -40,23 +40,23 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public boolean issueBook(int bId, int uId) {
-		return dao.issueBook(bId, uId);
+	public boolean issueBook(int bookId, int userId) {
+		return dao.issueBook(bookId, userId);
 	}
 
 	@Override
-	public boolean request(int uId, int bId) {
-		return dao.request(uId, bId);
+	public boolean request(int userId, int bookId) {
+		return dao.request(userId, bookId);
 	}
 
 	@Override
-	public List<BookBorrowedInfo> borrowedBook(int uId) {
-		return dao.borrowedBook(uId);
+	public List<BookBorrowedInfo> borrowedBook(int userId) {
+		return dao.borrowedBook(userId);
 	}
 
 	@Override
-	public List<BookInfo> searchBookById(int bId) {
-		return dao.searchBookById(bId);
+	public List<BookInfo> searchBookById(int bookId) {
+		return dao.searchBookById(bookId);
 	}
 
 	@Override
@@ -75,17 +75,17 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public boolean returnBook(int bId, int uId, String status) {
-		return dao.returnBook(bId, uId, status);
+	public boolean returnBook(int bookId, int userId, String status) {
+		return dao.returnBook(bookId, userId, status);
 	}
 
 	@Override
-	public List<Integer> bookHistoryDetails(int uId) {
-		return dao.bookHistoryDetails(uId);
+	public List<Integer> bookHistoryDetails(int userId) {
+		return dao.bookHistoryDetails(userId);
 	}
 
 	@Override
-	public List<RequestsInfo> showRequests() {
+	public List<BookRequestInfo> showRequests() {
 		return dao.showRequests();
 	}
 

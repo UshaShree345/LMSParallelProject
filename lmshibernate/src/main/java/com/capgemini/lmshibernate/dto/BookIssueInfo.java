@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "book_issue_details")
 @SequenceGenerator(name="seq", initialValue=1, allocationSize=100)
@@ -22,30 +23,31 @@ public class BookIssueInfo implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "seq")
 	private int id;
 	@Column
-	private int uId;
+	private int userId;
 	@Column
-	private int bId;
+	private int bookId;
 	@Column
 	private Date issueDate;
 	@Column
 	private Date returnDate;
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getuId() {
-		return uId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setuId(int uId) {
-		this.uId = uId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public int getbId() {
-		return bId;
+	public int getBookId() {
+		return bookId;
 	}
-	public void setbId(int bId) {
-		this.bId = bId;
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
 	}
 	public Date getIssueDate() {
 		return issueDate;

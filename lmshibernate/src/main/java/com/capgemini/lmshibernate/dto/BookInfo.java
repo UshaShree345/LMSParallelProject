@@ -17,20 +17,21 @@ public class BookInfo {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq3")
-	private int bId;
+	private int bookId;
 	@Column
 	private String bookName;
 	@Column
-	private String author;
+	private String bookAuthor;
 	@Column
-	private String category;
+	private String bookCategory;
 	@Column
-	private String publisher;
-	public int getbId() {
-		return bId;
+	private String bookPublisher;
+	
+	public int getBookId() {
+		return bookId;
 	}
-	public void setbId(int bId) {
-		this.bId = bId;
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
 	}
 	public String getBookName() {
 		return bookName;
@@ -38,26 +39,24 @@ public class BookInfo {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-	public String getAuthor() {
-		return author;
+	public String getBookAuthor() {
+		return bookAuthor;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setBookAuthor(String bookAuthor) {
+		this.bookAuthor = bookAuthor;
 	}
-	public String getCategory() {
-		return category;
+	public String getBookCategory() {
+		return bookCategory;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setBookCategory(String bookCategory) {
+		this.bookCategory = bookCategory;
 	}
-	public String getPublisher() {
-		return publisher;
+	public String getBookPublisher() {
+		return bookPublisher;
 	}
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
+	public void setBookPublisher(String bookPublisher) {
+		this.bookPublisher = bookPublisher;
 	}
-	
-	
 
 	/*
 	 * 

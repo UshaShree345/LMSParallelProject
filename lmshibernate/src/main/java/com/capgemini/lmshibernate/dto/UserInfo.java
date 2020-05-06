@@ -16,7 +16,7 @@ public class UserInfo {
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "seq4")
-	private int uId;
+	private int userId;
 	@Column
 	private String firstName;
 	@Column
@@ -29,11 +29,12 @@ public class UserInfo {
 	private long mobile;
 	@Column
 	private String role;
-	public int getuId() {
-		return uId;
+	
+	public int getUserId() {
+		return userId;
 	}
-	public void setuId(int uId) {
-		this.uId = uId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getFirstName() {
 		return firstName;

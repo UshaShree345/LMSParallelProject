@@ -7,34 +7,34 @@ import java.util.Scanner;
 import com.capgemini.lmshibernate.dto.BookInfo;
 import com.capgemini.lmshibernate.dto.BookIssueInfo;
 import com.capgemini.lmshibernate.dto.BookBorrowedInfo;
-import com.capgemini.lmshibernate.dto.RequestsInfo;
+import com.capgemini.lmshibernate.dto.BookRequestInfo;
 import com.capgemini.lmshibernate.dto.UserInfo;
 import com.capgemini.lmshibernate.exception.LMSException;
 import com.capgemini.lmshibernate.factory.Factory;
 import com.capgemini.lmshibernate.service.UserService;
 import com.capgemini.lmshibernate.validation.Validation;
 
-public class MainClass {
+public class SubLibraryMain {
 	
 	public static void LibraryOperations() {
 		
 		boolean flag = false;
-		int regId = 0;
-		String regFirstName = null;
-		String regLastName = null;
-		long regMobile = 0;
-		String regEmail = null;
-		String regPassword = null;
-		String regRole = null;
-
-		boolean loginStatus = true;
+		int checkId = 0;
+		String checkFirstName = null;
+		String checkLastName = null;
+		long checkMobile = 0;
+		String checkEmail = null;
+		String checkPassword = null;
+		String checkRole = null;
+		boolean checkStatus = true;
+		
 		Validation validation = new Validation();
 		do {
 			try (Scanner scanner = new Scanner(System.in);) {
 				System.out.println("<--------LIBRARY MANAGEMENT SYSTEM--------->");
-				System.out.println("Press 1 to Register");
-				System.out.println("Press 2 to Login");
-				System.out.println("Press 3 to EXIT");
+				System.out.println("[1]  REGISTER");
+				System.out.println("[2]  LOGIN");
+				System.out.println("[3]  EXIT");
 				do {
 					try {
 						UserService service1 = Factory.getUserService();
@@ -42,8 +42,8 @@ public class MainClass {
 						switch (choice) {
 						case 1:
 							/*
-							 * do { try { System.out.println("Enter ID :"); regId = scanner.nextInt();
-							 * validation.validatedId(regId); flag = true; } catch (InputMismatchException
+							 * do { try { System.out.println("Enter ID :"); checkId = scanner.nextInt();
+							 * validation.validatedId(checkId); flag = true; } catch (InputMismatchException
 							 * e) { flag = false; System.err.println("Id should contains only digits");
 							 * scanner.nextLine(); } catch (LMSException e) { flag = false;
 							 * System.err.println(e.getMessage()); } } while (!flag);
@@ -52,8 +52,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter First Name :");
-									regFirstName = scanner.next();
-									validation.validatedName(regFirstName);
+									checkFirstName = scanner.next();
+									validation.validatedName(checkFirstName);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -66,8 +66,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter Last Name :");
-									regLastName = scanner.next();
-									validation.validatedName(regLastName);
+									checkLastName = scanner.next();
+									validation.validatedName(checkLastName);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -81,8 +81,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter Email :");
-									regEmail = scanner.next();
-									validation.validatedEmail(regEmail);
+									checkEmail = scanner.next();
+									validation.validatedEmail(checkEmail);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -96,8 +96,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter Password :");
-									regPassword = scanner.next();
-									validation.validatedPassword(regPassword);
+									checkPassword = scanner.next();
+									validation.validatedPassword(checkPassword);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -111,8 +111,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter Mobile :");
-									regMobile = scanner.nextLong();
-									validation.validatedMobile(regMobile);
+									checkMobile = scanner.nextLong();
+									validation.validatedMobile(checkMobile);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -126,8 +126,8 @@ public class MainClass {
 							do {
 								try {
 									System.out.println("Enter Role :");
-									regRole = scanner.next();
-									validation.validatedRole(regRole);
+									checkRole = scanner.next();
+									validation.validatedRole(checkRole);
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
@@ -139,13 +139,13 @@ public class MainClass {
 							} while (!flag);
 							
 					        UserInfo ai = new UserInfo();
-							ai.setuId(regId);
-							ai.setFirstName(regFirstName);
-							ai.setLastName(regLastName);
-							ai.setEmail(regEmail);
-							ai.setPassword(regPassword);
-							ai.setMobile(regMobile);
-							ai.setRole(regRole);
+							ai.setUserId(checkId);
+							ai.setFirstName(checkFirstName);
+							ai.setLastName(checkLastName);
+							ai.setEmail(checkEmail);
+							ai.setPassword(checkPassword);
+							ai.setMobile(checkMobile);
+							ai.setRole(checkRole);
 							try {
 								boolean check = service1.register(ai);
 								if (check) {
@@ -171,20 +171,20 @@ public class MainClass {
 									do {
 										try {
 											System.out.println("-----------------------------------------------");
-											System.out.println("Press 1 to add book");
-											System.out.println("Press 2 to remove book");
-											System.out.println("Press 3 to issue book");
-											System.out.println("Press 4 to Search the Book by Author");
-											System.out.println("Press 5 to Search the Book by Title");
-											System.out.println("Press 6 to Get the Book Information");
-											System.out.println("Press 7 to Search the book by Id");
-											System.out.println("Press 8 to update the book");
-											System.out.println("Press 9 to check student book history");
-											System.out.println("Press 10 to check requests");
-											System.out.println("Press 11 to check issued books");
-											System.out.println("Press 12 to view users");
-											System.out.println("Press 13 to update Password");
-											System.out.println("Press 14 to logout");
+											System.out.println("[1]  ADD BOOK");
+											System.out.println("[2]  REMOVE BOOK");
+											System.out.println("[3]  ISSUE BOOK");
+											System.out.println("[4]  SEARCH BOOK BY AUTHOR NAME");
+											System.out.println("[5]  SEARCH BOOK BY BOOK TITLE");
+											System.out.println("[6]  VIEW ALL BOOKS");
+											System.out.println("[7]  SEARCH BOOK BY BOOK ID");
+											System.out.println("[8]  UPDATE BOOK");
+											System.out.println("[9]  CHECK STUDENT BOOK HISTROY");
+											System.out.println("[10] VIEW ALL REQUESTS");
+											System.out.println("[11] VIEW ISSUED BOOKS");
+											System.out.println("[12] VIEW ALL USERS");
+											System.out.println("[13] UPDATE PASSWORD");
+											System.out.println("[14] LOGOUT");
 
 											int choice1 = scanner.nextInt();
 											switch (choice1) {
@@ -206,9 +206,9 @@ public class MainClass {
 												BookInfo bi = new BookInfo();
 												// bi.setBId(addId);
 												bi.setBookName(addName);
-												bi.setAuthor(addAuth);
-												bi.setCategory(addCategory);
-												bi.setPublisher(addPublisher);
+												bi.setBookAuthor(addAuth);
+												bi.setBookCategory(addCategory);
+												bi.setBookPublisher(addPublisher);
 												// bi.setCopies(addCopies);
 												try {
 													boolean check2 = service1.addBook(bi);
@@ -278,10 +278,10 @@ public class MainClass {
 
 															if (BookInfo != null) {
 																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getbId(),
-																		BookInfo.getBookName(), BookInfo.getAuthor(),
-																		BookInfo.getCategory(),
-																		BookInfo.getPublisher()));
+																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
+																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
+																		BookInfo.getBookCategory(),
+																		BookInfo.getBookPublisher()));
 															}
 														}
 													} else {
@@ -306,10 +306,10 @@ public class MainClass {
 														for (BookInfo BookInfo : booktitle) {
 															if (BookInfo != null) {
 																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getbId(),
-																		BookInfo.getBookName(), BookInfo.getAuthor(),
-																		BookInfo.getCategory(),
-																		BookInfo.getPublisher()));
+																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
+																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
+																		BookInfo.getBookCategory(),
+																		BookInfo.getBookPublisher()));
 															}
 														}
 													} else {
@@ -333,10 +333,10 @@ public class MainClass {
 
 															if (BookInfo != null) {
 																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getbId(),
-																		BookInfo.getBookName(), BookInfo.getAuthor(),
-																		BookInfo.getCategory(),
-																		BookInfo.getPublisher()));
+																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
+																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
+																		BookInfo.getBookCategory(),
+																		BookInfo.getBookPublisher()));
 
 															}
 														}
@@ -361,10 +361,10 @@ public class MainClass {
 														for (BookInfo BookInfo : bId) {
 															if (BookInfo != null) {
 																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getbId(),
-																		BookInfo.getBookName(), BookInfo.getAuthor(),
-																		BookInfo.getCategory(),
-																		BookInfo.getPublisher()));
+																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
+																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
+																		BookInfo.getBookCategory(),
+																		BookInfo.getBookPublisher()));
 
 															}
 														}
@@ -383,7 +383,7 @@ public class MainClass {
 												System.out.println("Enter bookName to be updtaed");
 												String updatedBookName = scanner.next();
 												BookInfo bean2 = new BookInfo();
-												bean2.setbId(bid);
+												bean2.setBookId(bid);
 												bean2.setBookName(updatedBookName);
 												try {
 													boolean updated = service1.updateBook(bean2);
@@ -425,14 +425,14 @@ public class MainClass {
 											case 10:
 												System.out.println(" Requests received are:");
 												try {
-													List<RequestsInfo> requests = service1.showRequests();
+													List<BookRequestInfo> requests = service1.showRequests();
 													System.out.println(String.format("%10s %-10s %-10s %-25s %s", "id",
 															"User_Id", "Book_Id", "User_Email", "BookName"));
-													for (RequestsInfo requestBean : requests) {
+													for (BookRequestInfo requestBean : requests) {
 														if (requestBean != null) {
 															System.out.println(String.format(
 																	"%-10s %-10s %-10s %-25s %s", requestBean.getId(),
-																	requestBean.getuId(), requestBean.getbId(),
+																	requestBean.getUserId(), requestBean.getBookId(),
 																	requestBean.getEmail(), requestBean.getBookName()));
 
 														} else {
@@ -455,7 +455,7 @@ public class MainClass {
 														if (issueBean != null) {
 															System.out.println(String.format(
 																	"%-10s %-10s %-10s %25s %s", issueBean.getId(),
-																	issueBean.getuId(), issueBean.getbId(),
+																	issueBean.getUserId(), issueBean.getBookId(),
 																	issueBean.getIssueDate(),
 																	issueBean.getReturnDate()));
 
@@ -482,7 +482,7 @@ public class MainClass {
 														if (bean != null) {
 															System.out.println(String.format(
 																	"%-10s %-15s %-15s %-15s %-10s %-10s %s",
-																	bean.getuId(), bean.getFirstName(),
+																	bean.getUserId(), bean.getFirstName(),
 																	bean.getLastName(), bean.getEmail(),
 																	bean.getPassword(), bean.getMobile(),
 																	bean.getRole()));
@@ -540,15 +540,15 @@ public class MainClass {
 									do {
 										try {
 											System.out.println("-----------------------------------------------");
-											System.out.println("Press 1 to request book");
-											System.out.println("Press 2 to view the books borrowed");
-											System.out.println("Press 3 to search book by author");
-											System.out.println("Press 4 to search book by title");
-											System.out.println("Press 5 to search book by Id");
-											System.out.println("Press 6 to get books info");
-											System.out.println("Press 7 to return book");
-											System.out.println("Press 8 to update password");
-											System.out.println("Press 9 to main");
+											System.out.println("[1]  REQUEST BOOK");
+											System.out.println("[2]  VIEW BORROWED BOOKS");
+											System.out.println("[3]  SEARCH BOOK BY AUTHOR NAME");
+											System.out.println("[4]  SEARCH BOOK BY BOOK TITLE");
+											System.out.println("[5]  SEARCH BOOK BY BOOK ID");
+											System.out.println("[6]  VIEW ALL BOOKS");
+											System.out.println("[7]  RETURN BOOK");
+											System.out.println("[8]  UPDATE PASSWORD");
+											System.out.println("[9]  LOGOUT");
 
 											int choice2 = scanner.nextInt();
 											switch (choice2) {
@@ -558,7 +558,7 @@ public class MainClass {
 												System.out.println("Enter the user Id:");
 												int reqUserId = scanner.nextInt();
 												try {
-													if (loginInfo.getuId() == reqUserId) {
+													if (loginInfo.getUserId() == reqUserId) {
 														boolean requested = service1.request(reqUserId, reqBookId);
 														if (requested != false) {
 															System.out.println(
@@ -581,7 +581,7 @@ public class MainClass {
 												System.out.println("Enter the user Id");
 												int user_Id = scanner.nextInt();
 												try {
-													if (loginInfo.getuId() == user_Id) {
+													if (loginInfo.getUserId() == user_Id) {
 														List<BookBorrowedInfo> borrowedBookList = service1
 																.borrowedBook(user_Id);
 														System.out.println(String.format("%-5s %-5s %-5s %s", "Id",
@@ -590,8 +590,8 @@ public class MainClass {
 
 															if (BookInfo != null) {
 																System.out.println(String.format("%-5s %-5s %-5s %s",
-																		BookInfo.getId(), BookInfo.getuId(),
-																		BookInfo.getbId(), BookInfo.getBookName()));
+																		BookInfo.getId(), BookInfo.getUserId(),
+																		BookInfo.getBookId(), BookInfo.getBookName()));
 
 															} else {
 																System.out.println(
@@ -621,10 +621,10 @@ public class MainClass {
 
 															if (BookInfo != null) {
 																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getbId(),
-																		BookInfo.getBookName(), BookInfo.getAuthor(),
-																		BookInfo.getCategory(),
-																		BookInfo.getPublisher()));
+																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
+																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
+																		BookInfo.getBookCategory(),
+																		BookInfo.getBookPublisher()));
 															}
 														}
 													} else {
@@ -649,10 +649,10 @@ public class MainClass {
 														for (BookInfo BookInfo : booktitle) {
 															if (BookInfo != null) {
 																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getbId(),
-																		BookInfo.getBookName(), BookInfo.getAuthor(),
-																		BookInfo.getCategory(),
-																		BookInfo.getPublisher()));
+																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
+																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
+																		BookInfo.getBookCategory(),
+																		BookInfo.getBookPublisher()));
 
 															}
 														}
@@ -677,10 +677,10 @@ public class MainClass {
 														for (BookInfo BookInfo : bId) {
 															if (BookInfo != null) {
 																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getbId(),
-																		BookInfo.getBookName(), BookInfo.getAuthor(),
-																		BookInfo.getCategory(),
-																		BookInfo.getPublisher()));
+																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
+																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
+																		BookInfo.getBookCategory(),
+																		BookInfo.getBookPublisher()));
 
 															}
 														}
@@ -704,10 +704,10 @@ public class MainClass {
 
 															if (BookInfo != null) {
 																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getbId(),
-																		BookInfo.getBookName(), BookInfo.getAuthor(),
-																		BookInfo.getCategory(),
-																		BookInfo.getPublisher()));
+																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
+																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
+																		BookInfo.getBookCategory(),
+																		BookInfo.getBookPublisher()));
 
 															}
 														}
@@ -728,7 +728,7 @@ public class MainClass {
 												System.out.println("Enter the status of the book");
 												String status = scanner.next();
 												try {
-													if (loginInfo.getuId() == userId) {
+													if (loginInfo.getUserId() == userId) {
 														boolean returned = service1.returnBook(returnId, userId,
 																status);
 														if (returned != false) {
@@ -804,7 +804,7 @@ public class MainClass {
 					}
 				} while (true);
 			}
-		} while (loginStatus);
+		} while (checkStatus);
 	}
 
 }

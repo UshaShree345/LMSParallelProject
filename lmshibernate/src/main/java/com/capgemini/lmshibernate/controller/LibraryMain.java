@@ -4,7 +4,7 @@ public class LibraryMain {
    
 	public static void main(String[] args) {
 		
-		MainClass.LibraryOperations();
+		SubLibraryMain.LibraryOperations();
 		
 	}
 }
