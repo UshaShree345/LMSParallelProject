@@ -6,7 +6,7 @@ import java.util.List;
 import com.capgemini.lmscollection.dao.LibrarianDAO;
 import com.capgemini.lmscollection.dto.BooksInfo;
 import com.capgemini.lmscollection.dto.LibrarianInfo;
-import com.capgemini.lmscollection.dto.RequestInfo;
+import com.capgemini.lmscollection.dto.BookRequestInfo;
 import com.capgemini.lmscollection.dto.StudentInfo;
 import com.capgemini.lmscollection.factory.Factory;
 
@@ -65,7 +65,7 @@ public class LibrarianServiceImplementation implements LibrarianService {
 	}
 
 	@Override
-	public List<RequestInfo> showRequests() {
+	public List<BookRequestInfo> showRequests() {
 		return dao.showRequests();
 	}
 

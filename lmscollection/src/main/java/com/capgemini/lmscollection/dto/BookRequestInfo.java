@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @SuppressWarnings("serial")
-public class RequestInfo implements Serializable {
+public class BookRequestInfo implements Serializable {
 	
 	private BooksInfo bookInfo;
-	private StudentInfo StudentInfo;
 	private boolean isIssued;
 	private boolean isReturned;
+	private StudentInfo StudentInfo;
 	private LocalDate issuedDate;
 	private LocalDate returnedDate;
 	

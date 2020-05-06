@@ -16,23 +16,6 @@ public class StudentInfo implements Serializable {
 	private Date bookReturnDate;
 	private int booksBorrowed;
 	
-	public StudentInfo() {
-		
-	}
-	
-	public StudentInfo(int id, String name, String password, String department, String email, long mobileNo,
-			Date bookIssueDate, Date bookReturnDate, int booksBorrowed) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.password = password;
-		this.department = department;
-		this.email = email;
-		this.mobileNo = mobileNo;
-		this.bookIssueDate = bookIssueDate;
-		this.bookReturnDate = bookReturnDate;
-		this.booksBorrowed = booksBorrowed;
-	}
 	public int getId() {
 		return id;
 	}
@@ -88,6 +71,24 @@ public class StudentInfo implements Serializable {
 		this.booksBorrowed = booksBorrowed;
 	}
 
+    public StudentInfo() {
+		
+	}
+	
+	public StudentInfo(int id, String name, String password, String department, String email, long mobileNo,
+			Date bookIssueDate, Date bookReturnDate, int booksBorrowed) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.department = department;
+		this.email = email;
+		this.mobileNo = mobileNo;
+		this.bookIssueDate = bookIssueDate;
+		this.bookReturnDate = bookReturnDate;
+		this.booksBorrowed = booksBorrowed;
+	}
+	
 	@Override
 	public String toString() {
 		return "StudentInfo [id=" + id + ", name=" + name + ", password=" + password + ", department=" + department

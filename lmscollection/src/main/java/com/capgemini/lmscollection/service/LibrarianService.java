@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.capgemini.lmscollection.dto.BooksInfo;
 import com.capgemini.lmscollection.dto.LibrarianInfo;
-import com.capgemini.lmscollection.dto.RequestInfo;
+import com.capgemini.lmscollection.dto.BookRequestInfo;
 import com.capgemini.lmscollection.dto.StudentInfo;
 
 public interface LibrarianService {
@@ -20,7 +20,7 @@ public interface LibrarianService {
 	ArrayList<BooksInfo> searchBookByCategory(String category);
 	ArrayList<BooksInfo> getBooksInfo();
 	List<StudentInfo> showStudents();
-	List<RequestInfo> showRequests();
+	List<BookRequestInfo> showRequests();
 	boolean bookIssue(StudentInfo student,BooksInfo book);
 	boolean isBookReceived(StudentInfo student,BooksInfo book);
 }

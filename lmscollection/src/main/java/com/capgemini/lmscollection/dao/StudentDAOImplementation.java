@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.capgemini.lmscollection.db.LibraryDB;
 import com.capgemini.lmscollection.dto.BooksInfo;
-import com.capgemini.lmscollection.dto.RequestInfo;
+import com.capgemini.lmscollection.dto.BookRequestInfo;
 import com.capgemini.lmscollection.dto.StudentInfo;
 import com.capgemini.lmscollection.exception.LMSException;
 
@@ -54,7 +54,7 @@ public class StudentDAOImplementation implements StudentDAO {
 		ArrayList<BooksInfo> searchList = new ArrayList<BooksInfo>();
 		for (int i = 0; i <= LibraryDB.BOOKS.size()-1; i++) {
 			BooksInfo retrievedBook = LibraryDB.BOOKS.get(i);
-			String retrievedBAuthor = retrievedBook.getAuthor();
+			String retrievedBAuthor = retrievedBook.getBookAuthor();
 			if (author.equals(retrievedBAuthor)) {
 				searchList.add(retrievedBook);	
 			}
@@ -71,7 +71,7 @@ public class StudentDAOImplementation implements StudentDAO {
 		ArrayList<BooksInfo> searchList = new ArrayList<BooksInfo>();
 		for (int i = 0; i <= LibraryDB.BOOKS.size()-1; i++) {
 			BooksInfo retrievedBook=LibraryDB.BOOKS.get(i);
-			String retrievedBookType=retrievedBook.getCategory();
+			String retrievedBookType=retrievedBook.getBookCategory();
 			if (category.equals(retrievedBookType)) {
 				searchList.add(retrievedBook);	
 			}
@@ -89,14 +89,14 @@ public class StudentDAOImplementation implements StudentDAO {
 	}
 
 	@Override
-	public RequestInfo bookRequest(StudentInfo student, BooksInfo book) {
+	public BookRequestInfo bookRequest(StudentInfo student, BooksInfo book) {
 		boolean flag = false, 
 		isRequestExists = false;
-		RequestInfo requestInfo = new RequestInfo();
+		BookRequestInfo BookRequestInfo = new BookRequestInfo();
 		StudentInfo StudentInfo2 = new StudentInfo();
 		BooksInfo bookInfo2 = new BooksInfo();
-		for (RequestInfo requestInfo2 : LibraryDB.REQUEST) {
-			if (book.getBookId() == requestInfo2.getBookInfo().getBookId()) {
+		for (BookRequestInfo BookRequestInfo2 : LibraryDB.REQUEST) {
+			if (book.getBookId() == BookRequestInfo2.getBookInfo().getBookId()) {
 				isRequestExists = true;
 			}
 		}
@@ -113,24 +113,24 @@ public class StudentDAOImplementation implements StudentDAO {
 				}
 			}
 			if (flag == true) {
-				requestInfo.setBookInfo(bookInfo2);
-				requestInfo.setStudentInfo(StudentInfo2);;
-				LibraryDB.REQUEST.add(requestInfo);
-				return requestInfo;
+				BookRequestInfo.setBookInfo(bookInfo2);
+				BookRequestInfo.setStudentInfo(StudentInfo2);;
+				LibraryDB.REQUEST.add(BookRequestInfo);
+				return BookRequestInfo;
 			}
 		}
 		throw new LMSException("Invalid request or you cannot request that book");
 	}
 	
 	@Override
-	public RequestInfo bookReturn(StudentInfo student, BooksInfo book) {
-		for (RequestInfo requestInfo : LibraryDB.REQUEST) {
-			if (requestInfo.getBookInfo().getBookId() == book.getBookId() &&
-					requestInfo.getStudentInfo().getId() == student.getId() &&
-					requestInfo.isIssued() == true) {
+	public BookRequestInfo bookReturn(StudentInfo student, BooksInfo book) {
+		for (BookRequestInfo BookRequestInfo : LibraryDB.REQUEST) {
+			if (BookRequestInfo.getBookInfo().getBookId() == book.getBookId() &&
+					BookRequestInfo.getStudentInfo().getId() == student.getId() &&
+					BookRequestInfo.isIssued() == true) {
 				System.out.println("Returning Issued book only");
-				requestInfo.setReturned(true);
-				return requestInfo;
+				BookRequestInfo.setReturned(true);
+				return BookRequestInfo;
 			}
 		}
 		throw new  LMSException("Invalid return ");

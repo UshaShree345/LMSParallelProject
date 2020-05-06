@@ -11,19 +11,6 @@ public class LibrarianInfo implements Serializable {
 	private long mobileNo;
 	private String password;
 	
-	public LibrarianInfo() {
-	
-	}
-	
-	public LibrarianInfo(int id, String name, String email, long mobileNo, String password) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.mobileNo = mobileNo;
-		this.password = password;
-	}
-	
 	public int getId() {
 		return id;
 	}
@@ -52,6 +39,19 @@ public class LibrarianInfo implements Serializable {
 		return password;
 	}
 	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public LibrarianInfo() {
+		
+	}
+	
+	public LibrarianInfo(int id, String name, String email, long mobileNo, String password) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.mobileNo = mobileNo;
 		this.password = password;
 	}
 	

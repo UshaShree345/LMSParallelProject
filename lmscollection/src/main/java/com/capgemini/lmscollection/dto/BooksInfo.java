@@ -8,22 +8,9 @@ public class BooksInfo implements Serializable {
 
 	private int bookId = (int)Math.random();
 	private String bookName;
-	private String author;
-	private String category;
-	private String publishername;
-
-	public BooksInfo() {
-		
-	}
-	
-	public BooksInfo(int bookId, String bookName, String author, String category, String publishername) {
-		super();
-		this.bookId = bookId;
-		this.bookName = bookName;
-		this.author = author;
-		this.category = category;
-		this.publishername = publishername;
-	}
+	private String bookAuthor;
+	private String bookCategory;
+	private String bookPublisherName;
 
 	public int getBookId() {
 		return bookId;
@@ -41,33 +28,46 @@ public class BooksInfo implements Serializable {
 		this.bookName = bookName;
 	}
 
-	public String getAuthor() {
-		return author;
+	public String getBookAuthor() {
+		return bookAuthor;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setBookAuthor(String bookAuthor) {
+		this.bookAuthor = bookAuthor;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getBookCategory() {
+		return bookCategory;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setBookCategory(String bookCategory) {
+		this.bookCategory = bookCategory;
 	}
 
-	public String getPublishername() {
-		return publishername;
+	public String getBookPublisherName() {
+		return bookPublisherName;
 	}
 
-	public void setPublishername(String publishername) {
-		this.publishername = publishername;
+	public void setBookPublisherName(String bookPublisherName) {
+		this.bookPublisherName = bookPublisherName;
+	}
+
+    public BooksInfo() {
+		
+	}
+	
+	public BooksInfo(int bookId, String bookName, String bookAuthor, String bookCategory, String bookPublisherName) {
+		super();
+		this.bookId = bookId;
+		this.bookName = bookName;
+		this.bookAuthor = bookAuthor;
+		this.bookCategory = bookCategory;
+		this.bookPublisherName = bookPublisherName;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("%-10s %-10s %-13s %-15s %s", bookId, bookName, author, category, publishername);
+		return String.format("%-10s %-10s %-13s %-15s %s", bookId, bookName, bookAuthor, bookCategory, bookPublisherName);
 	}
 
 }

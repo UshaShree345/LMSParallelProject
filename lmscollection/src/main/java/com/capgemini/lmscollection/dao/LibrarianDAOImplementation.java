@@ -6,7 +6,7 @@ import java.util.List;
 import com.capgemini.lmscollection.db.LibraryDB;
 import com.capgemini.lmscollection.dto.BooksInfo;
 import com.capgemini.lmscollection.dto.LibrarianInfo;
-import com.capgemini.lmscollection.dto.RequestInfo;
+import com.capgemini.lmscollection.dto.BookRequestInfo;
 import com.capgemini.lmscollection.dto.StudentInfo;
 import com.capgemini.lmscollection.exception.LMSException;
 
@@ -82,7 +82,7 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 		ArrayList<BooksInfo> searchList = new ArrayList<BooksInfo>();
 		for (int i = 0; i <= LibraryDB.BOOKS.size()-1; i++) {
 			BooksInfo retrievedBook = LibraryDB.BOOKS.get(i);
-			String retrievedBAuthor = retrievedBook.getAuthor();
+			String retrievedBAuthor = retrievedBook.getBookAuthor();
 			if (author.equals(retrievedBAuthor)) {
 				searchList.add(retrievedBook);	
 			}
@@ -99,7 +99,7 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 		ArrayList<BooksInfo> searchList = new ArrayList<BooksInfo>();
 		for (int i = 0; i <= LibraryDB.BOOKS.size()-1; i++) {
 			BooksInfo retrievedBook = LibraryDB.BOOKS.get(i);
-			String retrievedBookType = retrievedBook.getCategory();
+			String retrievedBookType = retrievedBook.getBookCategory();
 			if(category.equals(retrievedBookType))
 			{
 				searchList.add(retrievedBook);	
@@ -126,8 +126,8 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 			BooksInfo retrievedBook=LibraryDB.BOOKS.get(i);
 			if (retrievedBook.getBookId() == book.getBookId()) {
 				retrievedBook.setBookName(book.getBookName());
-				retrievedBook.setAuthor(book.getAuthor());
-				retrievedBook.setCategory(book.getCategory());
+				retrievedBook.setBookAuthor(book.getBookAuthor());
+				retrievedBook.setBookCategory(book.getBookCategory());
 				return true;
 			}
 			else {
@@ -151,14 +151,14 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 	}
 	
 	@Override
-	public List<RequestInfo> showRequests() {
-		List<RequestInfo> info = new ArrayList<RequestInfo>();
-		for (RequestInfo requestInfo : LibraryDB.REQUEST) {
-			requestInfo.getBookInfo();
-			requestInfo.getStudentInfo();
-			requestInfo.isIssued();
-			requestInfo.isReturned();
-			info.add(requestInfo);
+	public List<BookRequestInfo> showRequests() {
+		List<BookRequestInfo> info = new ArrayList<BookRequestInfo>();
+		for (BookRequestInfo BookRequestInfo : LibraryDB.REQUEST) {
+			BookRequestInfo.getBookInfo();
+			BookRequestInfo.getStudentInfo();
+			BookRequestInfo.isIssued();
+			BookRequestInfo.isReturned();
+			info.add(BookRequestInfo);
 		}
 		return info;
 	}
@@ -166,12 +166,12 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 	@Override
 	public boolean bookIssue(StudentInfo student, BooksInfo book) {
 		boolean isValid = false;
-		RequestInfo requestInfo = new RequestInfo();
+		BookRequestInfo BookRequestInfo = new BookRequestInfo();
 		int noOfBooksBorrowed = student.getBooksBorrowed();
-		for (RequestInfo info : LibraryDB.REQUEST) {
+		for (BookRequestInfo info : LibraryDB.REQUEST) {
 			if (info.getStudentInfo().getId() == student.getId()) {
 				if (info.getBookInfo().getBookId() == book.getBookId()) {
-					requestInfo = info;
+					BookRequestInfo = info;
 					isValid = true;
 				}
 			}
@@ -194,7 +194,7 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 					noOfBooksBorrowed++;
 					System.out.println(noOfBooksBorrowed);
 					student.setBooksBorrowed(noOfBooksBorrowed);
-					requestInfo.setIssued(true);
+					BookRequestInfo.setIssued(true);
 					return true;
 				} else {
 					throw new LMSException("Book can't be borrowed");
@@ -210,20 +210,20 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 	@Override
 	public boolean isBookReceived(StudentInfo student, BooksInfo book) {
 		boolean isValid = false;
-		RequestInfo requestInfo1 = new RequestInfo();
-		for (RequestInfo requestInfo : LibraryDB.REQUEST) {
-			if ((requestInfo.getBookInfo().getBookId()) == (book.getBookId())
-					&& (requestInfo.getStudentInfo().getId()) == (student.getId()) 
-					&& (requestInfo.isReturned()) == true) {
+		BookRequestInfo BookRequestInfo1 = new BookRequestInfo();
+		for (BookRequestInfo BookRequestInfo : LibraryDB.REQUEST) {
+			if ((BookRequestInfo.getBookInfo().getBookId()) == (book.getBookId())
+					&& (BookRequestInfo.getStudentInfo().getId()) == (student.getId()) 
+					&& (BookRequestInfo.isReturned()) == true) {
 				isValid = true;
-				requestInfo1 = requestInfo;
+				BookRequestInfo1 = BookRequestInfo;
 			}
 		}
 		if (isValid) {
-			book.setAuthor(requestInfo1.getBookInfo().getAuthor());
-			book.setBookName(requestInfo1.getBookInfo().getBookName());
+			book.setBookAuthor(BookRequestInfo1.getBookInfo().getBookAuthor());
+			book.setBookName(BookRequestInfo1.getBookInfo().getBookName());
 			LibraryDB.BOOKS.add(book);
-			LibraryDB.REQUEST.remove(requestInfo1);
+			LibraryDB.REQUEST.remove(BookRequestInfo1);
 			for (StudentInfo StudentInfo2 : LibraryDB.STUDENT) {
 				if (StudentInfo2.getId() == student.getId()) {
 					student = StudentInfo2;

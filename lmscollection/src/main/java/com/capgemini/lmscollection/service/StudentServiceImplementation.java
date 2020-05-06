@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.capgemini.lmscollection.dao.StudentDAO;
 import com.capgemini.lmscollection.dto.BooksInfo;
-import com.capgemini.lmscollection.dto.RequestInfo;
+import com.capgemini.lmscollection.dto.BookRequestInfo;
 import com.capgemini.lmscollection.dto.StudentInfo;
 import com.capgemini.lmscollection.factory.Factory;
 
@@ -23,12 +23,12 @@ public class StudentServiceImplementation implements StudentService {
 	}
 
 	@Override
-	public RequestInfo bookRequest(StudentInfo student, BooksInfo book) {
+	public BookRequestInfo bookRequest(StudentInfo student, BooksInfo book) {
 		return dao.bookRequest(student, book);
 	}
 
 	@Override
-	public RequestInfo bookReturn(StudentInfo student, BooksInfo book) {
+	public BookRequestInfo bookReturn(StudentInfo student, BooksInfo book) {
 		return dao.bookReturn(student, book);
 	}
 
