@@ -5,11 +5,24 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class LibrarianInfo implements Serializable {
 	
-	private int id;
+	private int id = (int)Math.random();
 	private String name;
 	private String email;
 	private long mobileNo;
 	private String password;
+	
+	public LibrarianInfo() {
+	
+	}
+	
+	public LibrarianInfo(int id, String name, String email, long mobileNo, String password) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.mobileNo = mobileNo;
+		this.password = password;
+	}
 	
 	public int getId() {
 		return id;
@@ -41,4 +54,12 @@ public class LibrarianInfo implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	@Override
+	public String toString() {
+		return "LibrarianInfo [id=" + id + ", name=" + name + ", email=" + email + ", mobileNo=" + mobileNo
+				+ ", password=" + password + "]";
+	}
+	
+	
 }

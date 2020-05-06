@@ -6,7 +6,7 @@ import com.capgemini.lmscollection.db.LibraryDB;
 import com.capgemini.lmscollection.dto.BooksInfo;
 import com.capgemini.lmscollection.dto.RequestInfo;
 import com.capgemini.lmscollection.dto.StudentInfo;
-import com.capgemini.lmscollection.exception.CommonException;
+import com.capgemini.lmscollection.exception.LMSException;
 
 public class StudentDAOImplementation implements StudentDAO {
 
@@ -28,7 +28,7 @@ public class StudentDAOImplementation implements StudentDAO {
 				return student;
 			}
 		}
-		throw new CommonException("Invalid Credentials");
+		throw new LMSException("Invalid Credentials");
 	}
 	
 	@Override
@@ -43,7 +43,7 @@ public class StudentDAOImplementation implements StudentDAO {
 			}
 		}
 		if (searchList.size() == 0) {
-			throw new CommonException ("Book is not found");
+			throw new LMSException ("Book is not found");
 		} else {
 			return searchList;
 		}
@@ -60,7 +60,7 @@ public class StudentDAOImplementation implements StudentDAO {
 			}
 		}
 		if (searchList.size() == 0) {
-			throw new CommonException ("Book is not found");
+			throw new LMSException ("Book is not found");
 		} else {
 			return searchList;
 		}	
@@ -77,7 +77,7 @@ public class StudentDAOImplementation implements StudentDAO {
 			}
 		}
 		if (searchList.size() == 0) {
-			throw new CommonException("Book not found");
+			throw new LMSException("Book not found");
 		} else {
 			return searchList;
 		}	
@@ -119,7 +119,7 @@ public class StudentDAOImplementation implements StudentDAO {
 				return requestInfo;
 			}
 		}
-		throw new CommonException("Invalid request or you cannot request that book");
+		throw new LMSException("Invalid request or you cannot request that book");
 	}
 	
 	@Override
@@ -133,7 +133,7 @@ public class StudentDAOImplementation implements StudentDAO {
 				return requestInfo;
 			}
 		}
-		throw new  CommonException("Invalid return ");
+		throw new  LMSException("Invalid return ");
 	}
 }
 	

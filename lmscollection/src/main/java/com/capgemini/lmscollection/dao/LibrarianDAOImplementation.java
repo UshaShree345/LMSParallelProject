@@ -8,7 +8,7 @@ import com.capgemini.lmscollection.dto.BooksInfo;
 import com.capgemini.lmscollection.dto.LibrarianInfo;
 import com.capgemini.lmscollection.dto.RequestInfo;
 import com.capgemini.lmscollection.dto.StudentInfo;
-import com.capgemini.lmscollection.exception.CommonException;
+import com.capgemini.lmscollection.exception.LMSException;
 
 public class LibrarianDAOImplementation implements LibrarianDAO {
 	
@@ -30,7 +30,7 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 				return librarian;
 			}
 		}
-		throw new CommonException("Invalid Credentials");
+		throw new LMSException("Invalid Credentials");
 	}
 	
 	@Override
@@ -71,7 +71,7 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 			}
 		}
 		if (searchList.size() == 0) {
-			throw new CommonException("Book not found");
+			throw new LMSException("Book not found");
 		} else {
 		    return searchList;
 		}
@@ -88,7 +88,7 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 			}
 		}
 		if (searchList.size() == 0) {
-				throw new CommonException("Book not found");
+				throw new LMSException("Book not found");
 		} else {
 			return searchList;
 		}		
@@ -106,7 +106,7 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 			}
 		}
 		if (searchList.size() == 0) {
-			throw new CommonException("Book not found");
+			throw new LMSException("Book not found");
 		} else {
 			return searchList;
 		}
@@ -131,10 +131,10 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 				return true;
 			}
 			else {
-				throw new CommonException("Invalid Book");
+				throw new LMSException("Invalid Book");
 			}
 		} 
-		throw new CommonException("Book not updated");
+		throw new LMSException("Book not updated");
 	}
 	
 	@Override
@@ -197,13 +197,13 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 					requestInfo.setIssued(true);
 					return true;
 				} else {
-					throw new CommonException("Book can't be borrowed");
+					throw new LMSException("Book can't be borrowed");
 				}
 			} else {
-				throw new CommonException("Student Exceeds maximum limit");
+				throw new LMSException("Student Exceeds maximum limit");
 			}
 		} else {
-			throw new CommonException("Book data or Student data is incorrect");
+			throw new LMSException("Book data or Student data is incorrect");
 		}
 	}
 	

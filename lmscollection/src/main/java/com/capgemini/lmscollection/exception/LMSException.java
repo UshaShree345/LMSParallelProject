@@ -1,9 +1,9 @@
 package com.capgemini.lmscollection.exception;
 
 @SuppressWarnings("serial")
-public class CommonException extends RuntimeException {
+public class LMSException extends RuntimeException {
 	
-	public  CommonException(String message) {
+	public  LMSException(String message) {
 		super(message);
 	}
 }

@@ -6,7 +6,7 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class StudentInfo implements Serializable {
 	
-	private int id;
+	private int id = (int)Math.random();
 	private String name;
 	private String password;
     private String department;
@@ -16,6 +16,23 @@ public class StudentInfo implements Serializable {
 	private Date bookReturnDate;
 	private int booksBorrowed;
 	
+	public StudentInfo() {
+		
+	}
+	
+	public StudentInfo(int id, String name, String password, String department, String email, long mobileNo,
+			Date bookIssueDate, Date bookReturnDate, int booksBorrowed) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.department = department;
+		this.email = email;
+		this.mobileNo = mobileNo;
+		this.bookIssueDate = bookIssueDate;
+		this.bookReturnDate = bookReturnDate;
+		this.booksBorrowed = booksBorrowed;
+	}
 	public int getId() {
 		return id;
 	}
@@ -70,4 +87,13 @@ public class StudentInfo implements Serializable {
 	public void setBooksBorrowed(int booksBorrowed) {
 		this.booksBorrowed = booksBorrowed;
 	}
+
+	@Override
+	public String toString() {
+		return "StudentInfo [id=" + id + ", name=" + name + ", password=" + password + ", department=" + department
+				+ ", email=" + email + ", mobileNo=" + mobileNo + ", bookIssueDate=" + bookIssueDate
+				+ ", bookReturnDate=" + bookReturnDate + ", booksBorrowed=" + booksBorrowed + "]";
+	}
+	
+	
 }

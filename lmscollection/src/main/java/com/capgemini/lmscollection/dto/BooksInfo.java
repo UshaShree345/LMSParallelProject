@@ -1,15 +1,29 @@
 package com.capgemini.lmscollection.dto;
 
 import java.io.Serializable;
+import java.lang.Math;
 
 @SuppressWarnings("serial")
 public class BooksInfo implements Serializable {
 
-	private int bookId;
+	private int bookId = (int)Math.random();
 	private String bookName;
 	private String author;
 	private String category;
 	private String publishername;
+
+	public BooksInfo() {
+		
+	}
+	
+	public BooksInfo(int bookId, String bookName, String author, String category, String publishername) {
+		super();
+		this.bookId = bookId;
+		this.bookName = bookName;
+		this.author = author;
+		this.category = category;
+		this.publishername = publishername;
+	}
 
 	public int getBookId() {
 		return bookId;
