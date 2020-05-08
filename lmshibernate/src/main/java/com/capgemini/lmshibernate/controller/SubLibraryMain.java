@@ -38,9 +38,10 @@ public class SubLibraryMain {
 
 		do {
 			try (Scanner scanner = new Scanner(System.in);) {
-				System.out.println("Press 1 to Register");
-				System.out.println("Press 2 to Login");
-				System.out.println("Press 3 to EXIT");
+				System.out.println("<--------LIBRARY MANAGEMENT SYSTEM--------->");
+				System.out.println("[1]  REGISTER");
+				System.out.println("[2]  LOGIN");
+				System.out.println("[3]  EXIT");
 				do {
 					try {
 
@@ -177,20 +178,20 @@ public class SubLibraryMain {
 									do {
 										try {
 											System.out.println("-----------------------------------------------");
-											System.out.println("Press 1 to add book");
-											System.out.println("Press 2 to remove book");
-											System.out.println("Press 3 to issue book");
-											System.out.println("Press 4 to Search the Book by Author");
-											System.out.println("Press 5 to Search the Book by Title");
-											System.out.println("Press 6 to Get the Books Information");
-											System.out.println("Press 7 to Search the book category");
-											System.out.println("Press 8 to update the book");
-											System.out.println("Press 9 to check student book history");
-											System.out.println("Press 10 to check requests");
-											System.out.println("Press 11 to check issued books");
-											System.out.println("Press 12 to view UserInfos");
-											System.out.println("Press 13 to update Password");
-											System.out.println("Press 14 to logout");
+											System.out.println("[1]  ADD BOOK");
+											System.out.println("[2]  REMOVE BOOK");
+											System.out.println("[3]  ISSUE BOOK");
+											System.out.println("[4]  SEARCH BOOK BY AUTHOR NAME");
+											System.out.println("[5]  SEARCH BOOK BY BOOK TITLE");
+											System.out.println("[6]  VIEW ALL BOOKS");
+											System.out.println("[7]  SEARCH BOOK BY BOOK ID");
+											System.out.println("[8]  UPDATE BOOK");
+											System.out.println("[9]  CHECK STUDENT BOOK HISTROY");
+											System.out.println("[10] VIEW ALL REQUESTS");
+											System.out.println("[11] VIEW ISSUED BOOKS");
+											System.out.println("[12] VIEW ALL USERS");
+											System.out.println("[13] UPDATE PASSWORD");
+											System.out.println("[14] LOGOUT");
 
 											int choice1 = scanner.nextInt();
 											switch (choice1) {
@@ -536,15 +537,15 @@ public class SubLibraryMain {
 									do {
 										try {
 											System.out.println("-----------------------------------------------");
-											System.out.println("Press 1 to request book");
-											System.out.println("Press 2 to view the books borrowed");
-											System.out.println("Press 3 to search book by author");
-											System.out.println("Press 4 to search book by title");
-											System.out.println("Press 5 to search book by category");
-											System.out.println("Press 6 to get books info");
-											System.out.println("Press 7 to return book");
-											System.out.println("Press 8 to update password");
-											System.out.println("Press 9 to main");
+											System.out.println("[1]  REQUEST BOOK");
+											System.out.println("[2]  VIEW BORROWED BOOKS");
+											System.out.println("[3]  SEARCH BOOK BY AUTHOR NAME");
+											System.out.println("[4]  SEARCH BOOK BY BOOK TITLE");
+											System.out.println("[5]  SEARCH BOOK BY BOOK ID");
+											System.out.println("[6]  VIEW ALL BOOKS");
+											System.out.println("[7]  RETURN BOOK");
+											System.out.println("[8]  UPDATE PASSWORD");
+											System.out.println("[9]  LOGOUT");
 
 											int choice2 = scanner.nextInt();
 											switch (choice2) {

@@ -55,10 +55,9 @@ public class LibrarianStudentDAOImplementation implements LibrarianStudentDAO {
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			return null;
-		} finally {
-			manager.close();
-			factory.close();
-		}
+		} /*
+			 * finally { manager.close(); factory.close(); }
+			 */
 	}
 
 	@Override
