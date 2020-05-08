@@ -12,7 +12,9 @@ import com.capgemini.lmsjdbc.dto.BookRequestInfo;
 import com.capgemini.lmsjdbc.dto.UserInfo;
 import com.capgemini.lmsjdbc.exception.LMSException;
 import com.capgemini.lmsjdbc.factory.Factory;
-import com.capgemini.lmsjdbc.service.UserService;
+import com.capgemini.lmsjdbc.service.LibrarianService;
+import com.capgemini.lmsjdbc.service.LibrarianStudentService;
+import com.capgemini.lmsjdbc.service.StudentService;
 import com.capgemini.lmsjdbc.validation.Validation;
 
 public class SubLibraryMain {
@@ -36,10 +38,12 @@ public class SubLibraryMain {
 				System.out.println("[1] REGISTER");
 				System.out.println("[2] LOGIN");
 				System.out.println("[3] EXIT");
-				System.out.println("<----------------------->");
+                System.out.println("<----------------------->");
 				do {
 					try {
-						UserService service1 = Factory.getUserService();
+						LibrarianStudentService service1 = Factory.getLibrarianStudentService();
+						LibrarianService service2 = Factory.getLibrarianService();
+						StudentService service3 = Factory.getStudentService();
 						
 						int choice = scanner.nextInt();
 						switch (choice) {
@@ -221,7 +225,7 @@ public class SubLibraryMain {
 												bi.setPublisher(addPublisher);
 						
 												try {
-													boolean check2 = service1.addBook(bi);
+													boolean check2 = service2.addBook(bi);
 													if (check2) {
 														System.out.println("<------------------------------------->");
 														System.out.println("Book is added of id = "+addId);
@@ -238,7 +242,7 @@ public class SubLibraryMain {
 												System.out.println("Enter book id to remove : ");
 												int removeId = scanner.nextInt();
 												try {
-													boolean check3 = service1.removeBook(removeId);
+													boolean check3 = service2.removeBook(removeId);
 													if (check3) {
 														System.out.println("<------------------------------------------->");
 														System.out.println("Book is removed of id = "+removeId);
@@ -257,7 +261,7 @@ public class SubLibraryMain {
 												System.out.println("Enter Student Id : ");
 												int studentId = scanner.nextInt();
 												try {
-													boolean check4 = service1.issueBook(issueId,studentId);
+													boolean check4 = service2.issueBook(issueId,studentId);
 													if (check4) {
 														System.out.println("<------------------------------>");
 														System.out.println("Book Issued of id = "+issueId);
@@ -361,7 +365,7 @@ public class SubLibraryMain {
 												bean2.setbId(bid);
 												bean2.setBookName(updatedBookName);
 												try {
-													boolean updated = service1.updateBook(bean2);
+													boolean updated = service2.updateBook(bean2);
 													if (updated) {
 														System.out.println("<--------------------------------->");
 														System.out.println("Book is updated of id = "+bid);
@@ -378,7 +382,7 @@ public class SubLibraryMain {
 												System.out.println("Enter the Student Id : ");
 												int student_Id = scanner.nextInt();
 												try {
-													List<BookIssueInfo> sId = service1.bookHistoryDetails(student_Id);
+													List<BookIssueInfo> sId = service2.bookHistoryDetails(student_Id);
 													for (BookIssueInfo issueDetails : sId) {
 														if(issueDetails != null) {
 															System.out.println("<---------------------------------------------->");
@@ -396,7 +400,7 @@ public class SubLibraryMain {
 											case 10:
 												System.out.println(" Requests received are : ");
 												try {
-													List<BookRequestInfo> requests = service1.showRequests();
+													List<BookRequestInfo> requests = service2.showRequests();
 													System.out.println(
 															"<--------------------------------------------------------------------->");
 													System.out.println(String.format("%-10s %-10s %-10s %s", "UserId",
@@ -417,7 +421,7 @@ public class SubLibraryMain {
 											case 11:
 												System.out.println("Issued Books are : ");
 												try {
-													List<BookIssueInfo> issuedBooks = service1.showIssuedBooks();
+													List<BookIssueInfo> issuedBooks = service2.showIssuedBooks();
 													System.out.println(
 															"<--------------------------------------------------------------------->");
 													System.out.println(String.format("%-10s %-10s %-10s %s", "BookId",
@@ -437,7 +441,7 @@ public class SubLibraryMain {
 											case 12:
 												System.out.println("Users are : ");
 												try {
-													List<UserInfo> users = service1.showUsers();
+													List<UserInfo> users = service2.showUsers();
 													System.out.println(
 															"<--------------------------------------------------------------------->");
 													System.out.println(String.format("%-10s %-10s %-10s %-15s %-10s %-13s %s", "UserId",
@@ -513,7 +517,7 @@ public class SubLibraryMain {
 												int reqstudentId = scanner.nextInt();
 												try {
 													if (loginInfo.getSId() == reqstudentId) {
-														boolean requested = service1.request(reqstudentId,reqBookId);
+														boolean requested = service3.request(reqstudentId,reqBookId);
 														if (requested != false) {
 															System.out.println("<------------------------------------->");
 															System.out.println("Book is Requested of id = "+reqBookId);
@@ -534,7 +538,7 @@ public class SubLibraryMain {
 												int student_Id = scanner.nextInt();
 												try {
 													if(loginInfo.getSId() == student_Id) {
-														List<BookBorrowedInfo> borrowedBookList = service1.borrowedBook(student_Id);
+														List<BookBorrowedInfo> borrowedBookList = service3.borrowedBook(student_Id);
 														System.out.println(
 																"<--------------------------------------------------------------------->");
 														System.out.println(String.format("%-10s %-10s %s", "UserId",
@@ -647,7 +651,7 @@ public class SubLibraryMain {
 												String status = scanner.next();
 												try {
 													if(loginInfo.getSId() == studentId) {
-														boolean returned = service1.returnBook(returnId,studentId,status);
+														boolean returned = service3.returnBook(returnId,studentId,status);
 														if (returned != false) {
 															System.out.println("<------------------------------->");
 															System.out.println("Book is Returned of id = "+returnId);
