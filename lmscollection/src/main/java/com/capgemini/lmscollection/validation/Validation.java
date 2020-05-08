@@ -13,7 +13,7 @@ public class Validation {
 		if (Pattern.matches(idRegEx, String.valueOf(id))) {
 			result = true;
 		} else {
-			throw new LMSException("Invalid Id! Id should contain atleast 4 digits");
+			throw new LMSException("Invalid Id! Id should contain exactly 4 digits");
 		}
 		return result;
 	}
