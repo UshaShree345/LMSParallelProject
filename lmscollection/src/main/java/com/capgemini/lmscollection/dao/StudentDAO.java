@@ -9,11 +9,19 @@ import com.capgemini.lmscollection.dto.StudentInfo;
 public interface StudentDAO {
 	
 	boolean registerStudent(StudentInfo student);
+	
 	StudentInfo authenticateStudent(String email,String password);
-	public BookRequestInfo bookRequest(StudentInfo student, BooksInfo book);
-	public BookRequestInfo bookReturn(StudentInfo student, BooksInfo book);
+	
+	BookRequestInfo bookRequest(StudentInfo student, BooksInfo book);
+	
+    BookRequestInfo bookReturn(StudentInfo student, BooksInfo book);
+	
 	ArrayList<BooksInfo> searchBookByTitle(String bookName);
+	
 	ArrayList<BooksInfo> searchBookByAuthor(String author);
+	
 	ArrayList<BooksInfo> searchBookByCategory(String category);
+	
 	ArrayList<BooksInfo> getBooksInfo();
+	
 }

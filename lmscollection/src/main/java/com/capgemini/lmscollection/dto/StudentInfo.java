@@ -85,7 +85,7 @@ public class StudentInfo implements Serializable {
 		this.email = email;
 		this.mobileNo = mobileNo;
 		this.bookIssueDate = bookIssueDate;
-		this.bookReturnDate = bookReturnDate;
+	    this.bookReturnDate = bookReturnDate;
 		this.booksBorrowed = booksBorrowed;
 	}
 	
