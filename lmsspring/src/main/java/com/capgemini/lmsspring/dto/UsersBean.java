@@ -1,5 +1,7 @@
 package com.capgemini.lmsspring.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name="users")
 @SequenceGenerator(name="seq4", initialValue=100001, allocationSize=100)
-public class UserInfo {
+public class UsersBean implements Serializable{
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "seq4")
@@ -71,8 +75,9 @@ public class UserInfo {
 	public void setRole(String role) {
 		this.role = role;
 	}
-    
 	
+	
+
 	/*
 
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "users")

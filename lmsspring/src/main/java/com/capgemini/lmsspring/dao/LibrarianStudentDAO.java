@@ -1,12 +1,11 @@
-package com.capgemini.lmsspring.service;
+package com.capgemini.lmsspring.dao;
 
 import java.util.List;
 
 import com.capgemini.lmsspring.dto.BookBean;
 import com.capgemini.lmsspring.dto.UsersBean;
 
-public interface LibrarianStudentService {
-	
+public interface LibrarianStudentDAO {
 	boolean register(UsersBean user);
 	UsersBean login(String email,String password);	
 	List<BookBean> searchBookById(int bId);

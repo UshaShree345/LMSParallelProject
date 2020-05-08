@@ -9,22 +9,24 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LibraryResponse {
-	
+
 	private boolean error;
 	private String message;
+
+	private BookBean bookInfo;
+	private List<BookBean> booksInfo;
 	
-	private UserInfo userInfo;
-	private BookInfo bookInfo;
-	private BookIssueInfo bookIssueInfo;
-	private BookBorrowedInfo bookBorrowedInfo;
-	private RequestsInfo requestInfo;
+	private UsersBean userInfo;
+	private List<UsersBean> usersInfo;
+
+	private BookIssueBean bookIssueInfo;
+	private List<BookIssueBean> issueInfo;
 	
-	private List<UserInfo> userInfo2;
-	private List<BookInfo> bookInfo2;
-	private List<BookIssueInfo> bookIssueInfo2;
-	private List<BookBorrowedInfo> bookBorrowedInfo2;
-	private List<RequestsInfo> requestInfo2;
+	private BorrowedBooksBean borrowedBooksInfo;
+	private List<BorrowedBooksBean> borrowedBooks;
 	
+	private RequestDetailsBean requestInfo;
+	private List<RequestDetailsBean> requests;
 	public boolean isError() {
 		return error;
 	}
@@ -37,65 +39,66 @@ public class LibraryResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public UserInfo getUserInfo() {
-		return userInfo;
-	}
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
-	}
-	public BookInfo getBookInfo() {
+	public BookBean getBookInfo() {
 		return bookInfo;
 	}
-	public void setBookInfo(BookInfo bookInfo) {
+	public void setBookInfo(BookBean bookInfo) {
 		this.bookInfo = bookInfo;
 	}
-	public BookIssueInfo getBookIssueInfo() {
+	public List<BookBean> getBooksInfo() {
+		return booksInfo;
+	}
+	public void setBooksInfo(List<BookBean> booksInfo) {
+		this.booksInfo = booksInfo;
+	}
+	public UsersBean getUserInfo() {
+		return userInfo;
+	}
+	public void setUserInfo(UsersBean userInfo) {
+		this.userInfo = userInfo;
+	}
+	public List<UsersBean> getUsersInfo() {
+		return usersInfo;
+	}
+	public void setUsersInfo(List<UsersBean> usersInfo) {
+		this.usersInfo = usersInfo;
+	}
+	public BookIssueBean getBookIssueInfo() {
 		return bookIssueInfo;
 	}
-	public void setBookIssueInfo(BookIssueInfo bookIssueInfo) {
+	public void setBookIssueInfo(BookIssueBean bookIssueInfo) {
 		this.bookIssueInfo = bookIssueInfo;
 	}
-	public BookBorrowedInfo getBookBorrowedInfo() {
-		return bookBorrowedInfo;
+	public List<BookIssueBean> getIssueInfo() {
+		return issueInfo;
 	}
-	public void setBookBorrowedInfo(BookBorrowedInfo bookBorrowedInfo) {
-		this.bookBorrowedInfo = bookBorrowedInfo;
+	public void setIssueInfo(List<BookIssueBean> issueInfo) {
+		this.issueInfo = issueInfo;
 	}
-	public RequestsInfo getRequestInfo() {
+	public BorrowedBooksBean getBorrowedBooksInfo() {
+		return borrowedBooksInfo;
+	}
+	public void setBorrowedBooksInfo(BorrowedBooksBean borrowedBooksInfo) {
+		this.borrowedBooksInfo = borrowedBooksInfo;
+	}
+	public List<BorrowedBooksBean> getBorrowedBooks() {
+		return borrowedBooks;
+	}
+	public void setBorrowedBooks(List<BorrowedBooksBean> borrowedBooks) {
+		this.borrowedBooks = borrowedBooks;
+	}
+	public RequestDetailsBean getRequestInfo() {
 		return requestInfo;
 	}
-	public void setRequestInfo(RequestsInfo requestInfo) {
+	public void setRequestInfo(RequestDetailsBean requestInfo) {
 		this.requestInfo = requestInfo;
 	}
-	public List<UserInfo> getUserInfo2() {
-		return userInfo2;
+	public List<RequestDetailsBean> getRequests() {
+		return requests;
 	}
-	public void setUserInfo2(List<UserInfo> userInfo2) {
-		this.userInfo2 = userInfo2;
+	public void setRequests(List<RequestDetailsBean> requests) {
+		this.requests = requests;
 	}
-	public List<BookInfo> getBookInfo2() {
-		return bookInfo2;
-	}
-	public void setBookInfo2(List<BookInfo> bookInfo2) {
-		this.bookInfo2 = bookInfo2;
-	}
-	public List<BookIssueInfo> getBookIssueInfo2() {
-		return bookIssueInfo2;
-	}
-	public void setBookIssueInfo2(List<BookIssueInfo> bookIssueInfo2) {
-		this.bookIssueInfo2 = bookIssueInfo2;
-	}
-	public List<BookBorrowedInfo> getBookBorrowedInfo2() {
-		return bookBorrowedInfo2;
-	}
-	public void setBookBorrowedInfo2(List<BookBorrowedInfo> bookBorrowedInfo2) {
-		this.bookBorrowedInfo2 = bookBorrowedInfo2;
-	}
-	public List<RequestsInfo> getRequestInfo2() {
-		return requestInfo2;
-	}
-	public void setRequestInfo2(List<RequestsInfo> requestInfo2) {
-		this.requestInfo2 = requestInfo2;
-	}
+	
 	
 }

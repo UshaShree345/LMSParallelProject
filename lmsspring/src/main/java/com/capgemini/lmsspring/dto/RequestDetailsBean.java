@@ -10,10 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="request_details")
 @SequenceGenerator(name="seq1", initialValue=1, allocationSize=100)
-public class RequestsInfo implements Serializable {
+public class RequestDetailsBean implements Serializable{
 	
 	@Id
 	@Column
@@ -57,6 +60,6 @@ public class RequestsInfo implements Serializable {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-    
+
 	
 }

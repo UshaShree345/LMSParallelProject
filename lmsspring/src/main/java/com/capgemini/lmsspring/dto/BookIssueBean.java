@@ -11,12 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "book_issue_details")
 @SequenceGenerator(name="seq", initialValue=1, allocationSize=100)
-public class BookIssueInfo implements Serializable {
-	
+public class BookIssueBean implements Serializable{
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "seq")

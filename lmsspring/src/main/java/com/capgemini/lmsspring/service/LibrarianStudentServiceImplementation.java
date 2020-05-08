@@ -3,108 +3,59 @@ package com.capgemini.lmsspring.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.capgemini.lmsspring.dao.UserDAO;
-import com.capgemini.lmsspring.dto.BookBorrowedInfo;
-import com.capgemini.lmsspring.dto.BookInfo;
-import com.capgemini.lmsspring.dto.BookIssueInfo;
-import com.capgemini.lmsspring.dto.RequestsInfo;
-import com.capgemini.lmsspring.dto.UserInfo;
+import com.capgemini.lmsspring.dao.LibrarianStudentDAO;
+import com.capgemini.lmsspring.dto.BookBean;
+import com.capgemini.lmsspring.dto.UsersBean;
 
-
-public class UserServiceImplementation implements UserService {
+@Service
+public class LibrarianStudentServiceImplementation implements LibrarianStudentService {
 
 	@Autowired
-	private UserDAO dao;
+	private LibrarianStudentDAO dao;
 
 	@Override
-	public boolean register(UserInfo user) {
+	public boolean register(UsersBean user) {
+		// TODO Auto-generated method stub
 		return dao.register(user);
 	}
 
 	@Override
-	public UserInfo login(String email, String password) {
+	public UsersBean login(String email, String password) {
+		// TODO Auto-generated method stub
 		return dao.login(email, password);
 	}
 
 	@Override
-	public boolean addBook(BookInfo book) {
-		return dao.addBook(book);
-	}
-
-	@Override
-	public boolean removeBook(int bId) {
-		return dao.removeBook(bId);
-	}
-
-	@Override
-	public boolean updateBook(BookInfo book) {
-		return dao.updateBook(book);
-	}
-
-	@Override
-	public boolean issueBook(int bId, int uId) {
-		return dao.issueBook(bId, uId);
-	}
-
-	@Override
-	public boolean request(int uId, int bId) {
-		return dao.request(uId, bId);
-	}
-
-	@Override
-	public List<BookBorrowedInfo> borrowedBook(int uId) {
-		return dao.borrowedBook(uId);
-	}
-
-	@Override
-	public List<BookInfo> searchBookById(int bId) {
+	public List<BookBean> searchBookById(int bId) {
+		// TODO Auto-generated method stub
 		return dao.searchBookById(bId);
 	}
 
 	@Override
-	public List<BookInfo> searchBookByTitle(String bookName) {
+	public List<BookBean> searchBookByTitle(String bookName) {
+		// TODO Auto-generated method stub
 		return dao.searchBookByTitle(bookName);
 	}
 
 	@Override
-	public List<BookInfo> searchBookByAuthor(String author) {
+	public List<BookBean> searchBookByAuthor(String author) {
+		// TODO Auto-generated method stub
 		return dao.searchBookByAuthor(author);
 	}
 
 	@Override
-	public List<BookInfo> getBooksInfo() {
+	public List<BookBean> getBooksInfo() {
+		// TODO Auto-generated method stub
 		return dao.getBooksInfo();
 	}
 
 	@Override
-	public boolean returnBook(int bId, int uId, String status) {
-		return dao.returnBook(bId, uId, status);
-	}
-
-	@Override
-	public List<Integer> bookHistoryDetails(int uId) {
-		return dao.bookHistoryDetails(uId);
-	}
-
-	@Override
-	public List<RequestsInfo> showRequests() {
-		return dao.showRequests();
-	}
-
-	@Override
-	public List<BookIssueInfo> showIssuedBooks() {
-		return dao.showIssuedBooks();
-	}
-
-	@Override
-	public List<UserInfo> showUsers() {
-		return dao.showUsers();
-	}
-
-	@Override
 	public boolean updatePassword(int id, String password, String newPassword, String role) {
+		// TODO Auto-generated method stub
 		return dao.updatePassword(id, password, newPassword, role);
 	}
+
 	
 }

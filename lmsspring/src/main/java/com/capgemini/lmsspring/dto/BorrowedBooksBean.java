@@ -16,7 +16,7 @@ import lombok.Data;
 @Entity
 @Table(name="borrowed_books")
 @SequenceGenerator(name="seq2", initialValue=1, allocationSize=100)
-public class BookBorrowedInfo implements Serializable{
+public class BorrowedBooksBean implements Serializable{
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "seq2")
@@ -51,6 +51,6 @@ public class BookBorrowedInfo implements Serializable{
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-    
+
 	
 }
