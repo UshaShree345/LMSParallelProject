@@ -72,8 +72,6 @@ public class UserInfo {
 	public void setRole(String role) {
 		this.role = role;
 	}
-    
-	
 	/*
 
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "users")

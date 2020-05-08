@@ -4,22 +4,24 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.capgemini.lmshibernate.dto.BookBorrowedInfo;
 import com.capgemini.lmshibernate.dto.BookInfo;
 import com.capgemini.lmshibernate.dto.BookIssueInfo;
-import com.capgemini.lmshibernate.dto.BookBorrowedInfo;
 import com.capgemini.lmshibernate.dto.BookRequestInfo;
 import com.capgemini.lmshibernate.dto.UserInfo;
 import com.capgemini.lmshibernate.exception.LMSException;
 import com.capgemini.lmshibernate.factory.Factory;
-import com.capgemini.lmshibernate.service.UserService;
+import com.capgemini.lmshibernate.service.LibrarianService;
+import com.capgemini.lmshibernate.service.LibrarianStudentService;
+import com.capgemini.lmshibernate.service.StudentService;
 import com.capgemini.lmshibernate.validation.Validation;
 
 public class SubLibraryMain {
-	
+
 	public static void LibraryOperations() {
-		
+
 		boolean flag = false;
-		int checkId = 0;
+	//	int checkId = 0;
 		String checkFirstName = null;
 		String checkLastName = null;
 		long checkMobile = 0;
@@ -27,26 +29,30 @@ public class SubLibraryMain {
 		String checkPassword = null;
 		String checkRole = null;
 		boolean checkStatus = true;
-		
+
 		Validation validation = new Validation();
+
+		LibrarianStudentService service1 = Factory.getLibrarianStudentService();
+		LibrarianService service2 = Factory.getLibrarianService();
+		StudentService service3 = Factory.getStudentService();
+
 		do {
 			try (Scanner scanner = new Scanner(System.in);) {
-				System.out.println("<--------LIBRARY MANAGEMENT SYSTEM--------->");
-				System.out.println("[1]  REGISTER");
-				System.out.println("[2]  LOGIN");
-				System.out.println("[3]  EXIT");
+				System.out.println("Press 1 to Register");
+				System.out.println("Press 2 to Login");
+				System.out.println("Press 3 to EXIT");
 				do {
 					try {
-						UserService service1 = Factory.getUserService();
+
 						int choice = scanner.nextInt();
 						switch (choice) {
 						case 1:
 							/*
-							 * do { try { System.out.println("Enter ID :"); checkId = scanner.nextInt();
-							 * validation.validatedId(checkId); flag = true; } catch (InputMismatchException
-							 * e) { flag = false; System.err.println("Id should contains only digits");
-							 * scanner.nextLine(); } catch (LMSException e) { flag = false;
-							 * System.err.println(e.getMessage()); } } while (!flag);
+							 * do { try { System.out.println("Enter ID :"); regId = scanner.nextInt();
+							 * validation.validateId(regId); flag = true; } catch (InputMismatchException e)
+							 * { flag = false; System.err.println("Id should contains only digits"); } catch
+							 * (LMSException e) { flag = false; System.err.println(e.getMessage()); } }
+							 * while (!flag);
 							 */
 
 							do {
@@ -122,7 +128,7 @@ public class SubLibraryMain {
 									System.err.println(e.getMessage());
 								}
 							} while (!flag);
-							
+
 							do {
 								try {
 									System.out.println("Enter Role :");
@@ -131,15 +137,15 @@ public class SubLibraryMain {
 									flag = true;
 								} catch (InputMismatchException e) {
 									flag = false;
-									System.err.println("Choose either librarian or student as role");
+									System.err.println("Role should either Admin or Student");
 								} catch (LMSException e) {
 									flag = false;
 									System.err.println(e.getMessage());
 								}
 							} while (!flag);
-							
-					        UserInfo ai = new UserInfo();
-							ai.setUserId(checkId);
+
+							UserInfo ai = new UserInfo();
+							// ai.setId(regId);
 							ai.setFirstName(checkFirstName);
 							ai.setLastName(checkLastName);
 							ai.setEmail(checkEmail);
@@ -151,7 +157,7 @@ public class SubLibraryMain {
 								if (check) {
 									System.out.println("Registered");
 								} else {
-									System.out.println("Already user is registered");
+									System.out.println("Already UserInfo is registered");
 								}
 							} catch (LMSException e) {
 								System.err.println(e.getMessage());
@@ -165,32 +171,32 @@ public class SubLibraryMain {
 							try {
 								UserInfo loginInfo = service1.login(email, password);
 								if (loginInfo.getEmail().equals(email) && loginInfo.getPassword().equals(password)) {
-									System.out.println("Logged In");
+									System.out.println("Logged In Successfully");
 								}
-								if (loginInfo.getRole().equals("librarian")) {
+								if (loginInfo.getRole().equals("admin")) {
 									do {
 										try {
 											System.out.println("-----------------------------------------------");
-											System.out.println("[1]  ADD BOOK");
-											System.out.println("[2]  REMOVE BOOK");
-											System.out.println("[3]  ISSUE BOOK");
-											System.out.println("[4]  SEARCH BOOK BY AUTHOR NAME");
-											System.out.println("[5]  SEARCH BOOK BY BOOK TITLE");
-											System.out.println("[6]  VIEW ALL BOOKS");
-											System.out.println("[7]  SEARCH BOOK BY BOOK ID");
-											System.out.println("[8]  UPDATE BOOK");
-											System.out.println("[9]  CHECK STUDENT BOOK HISTROY");
-											System.out.println("[10] VIEW ALL REQUESTS");
-											System.out.println("[11] VIEW ISSUED BOOKS");
-											System.out.println("[12] VIEW ALL USERS");
-											System.out.println("[13] UPDATE PASSWORD");
-											System.out.println("[14] LOGOUT");
+											System.out.println("Press 1 to add book");
+											System.out.println("Press 2 to remove book");
+											System.out.println("Press 3 to issue book");
+											System.out.println("Press 4 to Search the Book by Author");
+											System.out.println("Press 5 to Search the Book by Title");
+											System.out.println("Press 6 to Get the Books Information");
+											System.out.println("Press 7 to Search the book category");
+											System.out.println("Press 8 to update the book");
+											System.out.println("Press 9 to check student book history");
+											System.out.println("Press 10 to check requests");
+											System.out.println("Press 11 to check issued books");
+											System.out.println("Press 12 to view UserInfos");
+											System.out.println("Press 13 to update Password");
+											System.out.println("Press 14 to logout");
 
 											int choice1 = scanner.nextInt();
 											switch (choice1) {
 											case 1:
-												// System.out.println("enter id");
-												// int addId=scanner.nextInt();
+												System.out.println("enter id");
+												int addId = scanner.nextInt();
 												System.out.println("enter bookname");
 												String addName = scanner.next();
 												System.out.println("enter authorname");
@@ -204,14 +210,14 @@ public class SubLibraryMain {
 												 * scanner.nextInt();
 												 */
 												BookInfo bi = new BookInfo();
-												// bi.setBId(addId);
+												bi.setBookId(addId);
 												bi.setBookName(addName);
 												bi.setBookAuthor(addAuth);
 												bi.setBookCategory(addCategory);
 												bi.setBookPublisher(addPublisher);
 												// bi.setCopies(addCopies);
 												try {
-													boolean check2 = service1.addBook(bi);
+													boolean check2 = service2.addBook(bi);
 													if (check2) {
 														System.out.println(
 																"-----------------------------------------------");
@@ -230,7 +236,7 @@ public class SubLibraryMain {
 												System.out.println("enter id");
 												int removeId = scanner.nextInt();
 												try {
-													boolean check3 = service1.removeBook(removeId);
+													boolean check3 = service2.removeBook(removeId);
 													if (check3) {
 														System.out.println(
 																"-----------------------------------------------");
@@ -248,10 +254,10 @@ public class SubLibraryMain {
 											case 3:
 												System.out.println("enter Book Id");
 												int issueId = scanner.nextInt();
-												System.out.println("Enter User Id");
-												int userId = scanner.nextInt();
+												System.out.println("Enter UserInfo Id");
+												int UserInfoId = scanner.nextInt();
 												try {
-													boolean check4 = service1.issueBook(issueId, userId);
+													boolean check4 = service2.issueBook(issueId, UserInfoId);
 													if (check4) {
 														System.out.println(
 																"-----------------------------------------------");
@@ -271,52 +277,50 @@ public class SubLibraryMain {
 												try {
 													List<BookInfo> bookauthor = service1.searchBookByAuthor(author);
 													if (!bookauthor.isEmpty() && bookauthor != null) {
-														System.out.println(String.format("%-10s %-25s %-25s %-20s %s",
-																"Book-Id", "Book-Name", "Author", "Category",
-																"Publisher"));
-														for (BookInfo BookInfo : bookauthor) {
+														System.out.println(
+																"<--------------------------------------------------------------------->");
+														System.out.println(String.format("%-10s %-10s %-13s %-15s %s",
+																"BookId", "BookName", "BookAuthor", "BookCategory",
+																"BookPublisherName"));
+														for (BookInfo bookBean : bookauthor) {
 
-															if (BookInfo != null) {
-																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
-																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
-																		BookInfo.getBookCategory(),
-																		BookInfo.getBookPublisher()));
+															if (bookBean != null) {
+																System.out.println(bookBean.toString());
 															}
 														}
 													} else {
 														System.out.println(
 																"-----------------------------------------------");
-														System.err.println(
+														System.out.println(
 																"No books are available written by this author");
 													}
+
 												} catch (LMSException e) {
 													System.err.println(e.getMessage());
 												}
 												break;
 											case 5:
-												System.out.println("Search the book by the Book_Title :");
+												System.out.println("  Search the book by the Book_Title :");
 												String btitle = scanner.next();
 												try {
 													List<BookInfo> booktitle = service1.searchBookByTitle(btitle);
 													if (!booktitle.isEmpty() && booktitle != null) {
-														System.out.println(String.format("%-10s %-25s %-25s %-20s %s",
-																"Book-Id", "Book-Name", "Author", "Category",
-																"Publisher"));
-														for (BookInfo BookInfo : booktitle) {
-															if (BookInfo != null) {
-																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
-																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
-																		BookInfo.getBookCategory(),
-																		BookInfo.getBookPublisher()));
+														System.out.println(
+																"<--------------------------------------------------------------------->");
+														System.out.println(String.format("%-10s %-10s %-13s %-15s %s",
+																"BookId", "BookName", "BookAuthor", "BookCategory",
+																"BookPublisherName"));
+														for (BookInfo bookBean : booktitle) {
+															if (bookBean != null) {
+																System.out.println(bookBean.toString());
 															}
 														}
 													} else {
 														System.out.println(
 																"-----------------------------------------------");
-														System.err.println("No books are available with this title.");
+														System.out.println("No books are available with this title.");
 													}
+
 												} catch (LMSException e) {
 													System.err.println(e.getMessage());
 												}
@@ -326,45 +330,45 @@ public class SubLibraryMain {
 												try {
 													List<BookInfo> info = service1.getBooksInfo();
 													if (!info.isEmpty() && info != null) {
-														System.out.println(String.format("%-10s %-25s %-25s %-20s %s",
-																"Book-Id", "Book-Name", "Author", "Category",
-																"Publisher"));
-														for (BookInfo BookInfo : info) {
+														System.out.println(
+																"<--------------------------------------------------------------------->");
+														System.out.println(String.format("%-10s %-10s %-13s %-15s %s",
+																"BookId", "BookName", "BookAuthor", "BookCategory",
+																"BookPublisherName"));
+														for (BookInfo bookBean : info) {
 
-															if (BookInfo != null) {
-																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
-																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
-																		BookInfo.getBookCategory(),
-																		BookInfo.getBookPublisher()));
+															if (bookBean != null) {
 
+																System.out.println(bookBean.toString());
 															}
 														}
 													} else {
 														System.out.println(
 																"-----------------------------------------------");
-														System.err.println("Books info is not present");
+														System.out.println("Books info is not present");
 													}
+
 												} catch (LMSException e) {
 													System.err.println(e.getMessage());
 												}
 												break;
 											case 7:
-												System.out.println("Search the book by the Book_ID :");
+												System.out.println("  Search the book by the Book_ID :");
 												int book_Id = scanner.nextInt();
 												try {
 													List<BookInfo> bId = service1.searchBookById(book_Id);
 													if (!bId.isEmpty() && bId != null) {
-														System.out.println(String.format("%-10s %-25s %-25s %-20s %s",
-																"Book-Id", "Book-Name", "Author", "Category",
-																"Publisher"));
-														for (BookInfo BookInfo : bId) {
-															if (BookInfo != null) {
+														System.out.println(String.format("%-10s %-15s %-15s %-10s %s",
+																"BookId", "BookName", "AuthorName", "BookCategory",
+																"PublisherName"));
+														for (BookInfo bookBean : bId) {
+															if (bookBean != null) {
 																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
-																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
-																		BookInfo.getBookCategory(),
-																		BookInfo.getBookPublisher()));
+																		"%-10s %-15s %-15s %-10s %s",
+																		bookBean.getBookId(), bookBean.getBookName(),
+																		bookBean.getBookAuthor(),
+																		bookBean.getBookCategory(),
+																		bookBean.getBookPublisher()));
 
 															}
 														}
@@ -386,7 +390,7 @@ public class SubLibraryMain {
 												bean2.setBookId(bid);
 												bean2.setBookName(updatedBookName);
 												try {
-													boolean updated = service1.updateBook(bean2);
+													boolean updated = service2.updateBook(bean2);
 													if (updated) {
 														System.out.println(
 																"-----------------------------------------------");
@@ -402,10 +406,10 @@ public class SubLibraryMain {
 												break;
 
 											case 9:
-												System.out.println("Enter the User Id");
-												int user_Id = scanner.nextInt();
+												System.out.println("Enter the UserInfo Id");
+												int UserInfo_Id = scanner.nextInt();
 												try {
-													List<Integer> uid = service1.bookHistoryDetails(user_Id);
+													List<Integer> uid = service2.bookHistoryDetails(UserInfo_Id);
 													for (Integer issueDetails : uid) {
 														if (issueDetails != null) {
 															System.out.println(
@@ -415,7 +419,7 @@ public class SubLibraryMain {
 															System.out.println(
 																	"-----------------------------------------------");
 															System.out.println(
-																	"Respective user hasn't borrowed any books");
+																	"Respective UserInfo hasn't borrowed any books");
 														}
 													}
 												} catch (LMSException e) {
@@ -425,16 +429,15 @@ public class SubLibraryMain {
 											case 10:
 												System.out.println(" Requests received are:");
 												try {
-													List<BookRequestInfo> requests = service1.showRequests();
-													System.out.println(String.format("%10s %-10s %-10s %-25s %s", "id",
-															"User_Id", "Book_Id", "User_Email", "BookName"));
+													List<BookRequestInfo> requests = service2.showRequests();
+													System.out.println(
+															"<--------------------------------------------------------------------->");
+													System.out.println(String.format("%-10s %-10s %-10s %s",
+															"UserInfoId", "UserInfoName", "BookId", "BookName"));
+
 													for (BookRequestInfo requestBean : requests) {
 														if (requestBean != null) {
-															System.out.println(String.format(
-																	"%-10s %-10s %-10s %-25s %s", requestBean.getId(),
-																	requestBean.getUserId(), requestBean.getBookId(),
-																	requestBean.getEmail(), requestBean.getBookName()));
-
+															System.out.println(requestBean.toString());
 														} else {
 															System.out.println(
 																	"-----------------------------------------------");
@@ -448,17 +451,15 @@ public class SubLibraryMain {
 											case 11:
 												System.out.println("Issued Books are:");
 												try {
-													List<BookIssueInfo> issuedBooks = service1.showIssuedBooks();
-													System.out.println(String.format("%-10s %-10s %-10s %25s %s", "Id",
-															"User_Id", "Book_Id", "Issue_Date", "Return_Date"));
+													List<BookIssueInfo> issuedBooks = service2.showIssuedBooks();
+													System.out.println(
+															"<--------------------------------------------------------------------->");
+													System.out.println(String.format("%-10s %-10s %-10s %s", "BookId",
+															"UserInfoId", "IssueDate", "ReturnDate"));
 													for (BookIssueInfo issueBean : issuedBooks) {
 														if (issueBean != null) {
-															System.out.println(String.format(
-																	"%-10s %-10s %-10s %25s %s", issueBean.getId(),
-																	issueBean.getUserId(), issueBean.getBookId(),
-																	issueBean.getIssueDate(),
-																	issueBean.getReturnDate()));
 
+															System.out.println(issueBean.toString());
 														} else {
 															System.out.println(
 																	"-----------------------------------------------");
@@ -470,27 +471,22 @@ public class SubLibraryMain {
 												}
 												break;
 											case 12:
-												System.out.println("Users are:");
+												System.out.println("UserInfos are:");
 												try {
-
-													List<UserInfo> users = service1.showUsers();
+													List<UserInfo> UserInfos = service2.showUsers();
 													System.out.println(
-															String.format("%-10s %-15s %-15s %-15s %-10s %-10s %s",
-																	"UserId", "FirstName", "LastName", "Email",
-																	"Password", "Mobile", "Role"));
-													for (UserInfo bean : users) {
+															"<--------------------------------------------------------------------->");
+													System.out.println(
+															String.format("%-10s %-10s %-10s %-15s %-10s %-13s %s",
+																	"UserInfoId", "FirstName", "LastName", "Email",
+																	"Password", "MobileNumber", "Role"));
+													for (UserInfo bean : UserInfos) {
 														if (bean != null) {
-															System.out.println(String.format(
-																	"%-10s %-15s %-15s %-15s %-10s %-10s %s",
-																	bean.getUserId(), bean.getFirstName(),
-																	bean.getLastName(), bean.getEmail(),
-																	bean.getPassword(), bean.getMobile(),
-																	bean.getRole()));
-
+															System.out.println(bean.toString());
 														} else {
 															System.out.println(
 																	"-----------------------------------------------");
-															System.out.println("No Users are present");
+															System.out.println("No UserInfos are present");
 														}
 													}
 												} catch (LMSException e) {
@@ -504,10 +500,10 @@ public class SubLibraryMain {
 												String old_Password = scanner.next();
 												System.out.println("Enter the new password");
 												String new_Password = scanner.next();
-												String user_Role = loginInfo.getRole();
+												String UserInfo_Role = loginInfo.getRole();
 												try {
 													boolean updated = service1.updatePassword(id, old_Password,
-															new_Password, user_Role);
+															new_Password, UserInfo_Role);
 													if (updated) {
 														System.out.println(
 																"-----------------------------------------------");
@@ -540,26 +536,26 @@ public class SubLibraryMain {
 									do {
 										try {
 											System.out.println("-----------------------------------------------");
-											System.out.println("[1]  REQUEST BOOK");
-											System.out.println("[2]  VIEW BORROWED BOOKS");
-											System.out.println("[3]  SEARCH BOOK BY AUTHOR NAME");
-											System.out.println("[4]  SEARCH BOOK BY BOOK TITLE");
-											System.out.println("[5]  SEARCH BOOK BY BOOK ID");
-											System.out.println("[6]  VIEW ALL BOOKS");
-											System.out.println("[7]  RETURN BOOK");
-											System.out.println("[8]  UPDATE PASSWORD");
-											System.out.println("[9]  LOGOUT");
+											System.out.println("Press 1 to request book");
+											System.out.println("Press 2 to view the books borrowed");
+											System.out.println("Press 3 to search book by author");
+											System.out.println("Press 4 to search book by title");
+											System.out.println("Press 5 to search book by category");
+											System.out.println("Press 6 to get books info");
+											System.out.println("Press 7 to return book");
+											System.out.println("Press 8 to update password");
+											System.out.println("Press 9 to main");
 
 											int choice2 = scanner.nextInt();
 											switch (choice2) {
 											case 1:
 												System.out.println("Enter the Book Id:");
 												int reqBookId = scanner.nextInt();
-												System.out.println("Enter the user Id:");
-												int reqUserId = scanner.nextInt();
+												System.out.println("Enter the UserInfo Id:");
+												int reqUserInfoId = scanner.nextInt();
 												try {
-													if (loginInfo.getUserId() == reqUserId) {
-														boolean requested = service1.request(reqUserId, reqBookId);
+													if (loginInfo.getUserId() == reqUserInfoId) {
+														boolean requested = service3.request(reqUserInfoId, reqBookId);
 														if (requested != false) {
 															System.out.println(
 																	"-----------------------------------------------");
@@ -570,7 +566,7 @@ public class SubLibraryMain {
 															System.out.println("Book is not Requested");
 														}
 													} else {
-														System.out.println("Enter the correct UserId");
+														System.out.println("Enter the correct UserInfoId");
 													}
 												} catch (LMSException e) {
 													System.err.println(e.getMessage());
@@ -578,28 +574,30 @@ public class SubLibraryMain {
 												break;
 
 											case 2:
-												System.out.println("Enter the user Id");
-												int user_Id = scanner.nextInt();
+												System.out.println("Enter the UserInfo Id");
+												int UserInfo_Id = scanner.nextInt();
 												try {
-													if (loginInfo.getUserId() == user_Id) {
-														List<BookBorrowedInfo> borrowedBookList = service1
-																.borrowedBook(user_Id);
-														System.out.println(String.format("%-5s %-5s %-5s %s", "Id",
-																"User-Id", "Book-Id", "BookName"));
-														for (BookBorrowedInfo BookInfo : borrowedBookList) {
+													if (loginInfo.getUserId() == UserInfo_Id) {
+														List<BookBorrowedInfo> borrowedBookList = service3
+																.borrowedBook(UserInfo_Id);
+														System.out.println(
+																"<--------------------------------------------------------------------->");
+														System.out.println(String.format("%-10s %-10s %s", "UserInfoId",
+																"BookId", "EmailId"));
+														for (BookBorrowedInfo bookBean : borrowedBookList) {
 
-															if (BookInfo != null) {
-																System.out.println(String.format("%-5s %-5s %-5s %s",
-																		BookInfo.getId(), BookInfo.getUserId(),
-																		BookInfo.getBookId(), BookInfo.getBookName()));
+															if (bookBean != null) {
+																System.out.println(bookBean.toString());
+
 															} else {
 																System.out.println(
 																		"-----------------------------------------------");
-																System.out.println("No books are borrowed by the user");
+																System.out.println(
+																		"No books are borrowed by the UserInfo");
 															}
 														}
 													} else {
-														System.err.println("Incorrect user_Id");
+														System.out.println("Incorrect UserInfo_Id");
 													}
 												} catch (LMSException e) {
 													System.err.println(e.getMessage());
@@ -607,86 +605,78 @@ public class SubLibraryMain {
 												break;
 
 											case 3:
-												System.out.println("Search the book by the Author Name:");
+												System.out.println("Search the book by the Author Name :");
 												String author = scanner.next();
 												try {
 													List<BookInfo> bookauthor = service1.searchBookByAuthor(author);
-													if (!bookauthor.isEmpty() && bookauthor != null) {
-														System.out.println(String.format("%-10s %-25s %-25s %-20s %s",
-																"Book-Id", "Book-Name", "Author", "Category",
-																"Publisher"));
+													System.out.println(
+															"<----------------------------------------------------------------->");
+													System.out.println(String.format("%-10s %-10s %-13s %-15s %s",
+															"BookId", "BookName", "BookAuthor", "BookCategory",
+															"BookPublisherName"));
+													for (BookInfo bookBean : bookauthor) {
 
-														for (BookInfo BookInfo : bookauthor) {
+														if (bookBean != null) {
 
-															if (BookInfo != null) {
-																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
-																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
-																		BookInfo.getBookCategory(),
-																		BookInfo.getBookPublisher()));
-															}
+															System.out.println(bookBean.toString());
+														} else {
+															System.out.println(
+																	"-----------------------------------------------");
+															System.out.println(
+																	"No books are available written by this author");
 														}
-													} else {
-														System.out.println(
-																"-----------------------------------------------");
-														System.err.println(
-																"No books are available written by this author");
 													}
 												} catch (LMSException e) {
 													System.err.println(e.getMessage());
 												}
 												break;
 											case 4:
-												System.out.println("Search the book by the Book_Title :");
+												System.out.println("Search the book by the Book Title :");
 												String btitle = scanner.next();
+
 												try {
 													List<BookInfo> booktitle = service1.searchBookByTitle(btitle);
-													if (!booktitle.isEmpty() && booktitle != null) {
-														System.out.println(String.format("%-10s %-25s %-25s %-20s %s",
-																"Book-Id", "Book-Name", "Author", "Category",
-																"Publisher"));
-														for (BookInfo BookInfo : booktitle) {
-															if (BookInfo != null) {
-																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
-																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
-																		BookInfo.getBookCategory(),
-																		BookInfo.getBookPublisher()));
+													System.out.println(
+															"<----------------------------------------------------------------->");
+													System.out.println(String.format("%-10s %-10s %-13s %-15s %s",
+															"BookId", "BookName", "BookAuthor", "BookCategory",
+															"BookPublisherName"));
+													for (BookInfo bookBean : booktitle) {
+														if (bookBean != null) {
+															System.out.println(bookBean.toString());
 
-															}
+														} else {
+															System.out.println(
+																	"-----------------------------------------------");
+															System.out
+																	.println("No books are available with this title.");
 														}
-													} else {
-														System.out.println(
-																"-----------------------------------------------");
-														System.err.println("No books are available with this title.");
 													}
 												} catch (LMSException e) {
 													System.err.println(e.getMessage());
 												}
 												break;
 											case 5:
-												System.out.println("  Search the book by the Book_ID :");
-												int book_Id = scanner.nextInt();
-												try {
-													List<BookInfo> bId = service1.searchBookById(book_Id);
-													if (!bId.isEmpty() && bId != null) {
-														System.out.println(String.format("%-10s %-25s %-25s %-20s %s",
-																"Book-Id", "Book-Name", "Author", "Category",
-																"Publisher"));
-														for (BookInfo BookInfo : bId) {
-															if (BookInfo != null) {
-																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
-																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
-																		BookInfo.getBookCategory(),
-																		BookInfo.getBookPublisher()));
+												System.out.println("  Search the book by the Book category :");
+												String bcategory = scanner.next();
 
-															}
+												try {
+													BookInfo bean5 = new BookInfo();
+													bean5.setBookName(bcategory);
+													List<BookInfo> bookCategory1 = service1
+															.searchBookByTitle(bcategory);
+													System.out.println(
+															"<----------------------------------------------------------------->");
+													System.out.println(String.format("%-10s %-10s %-13s %-15s %s",
+															"BookId", "BookName", "BookAuthor", "BookCategory",
+															"BookPublisherName"));
+													for (BookInfo bookBean : bookCategory1) {
+														if (bookBean != null) {
+															System.out.println(bookBean.toString());
+														} else {
+															System.out
+																	.println("No books are available with this title.");
 														}
-													} else {
-														System.out.println(
-																"-----------------------------------------------");
-														System.err.println("No books are available with this ID.");
 													}
 												} catch (LMSException e) {
 													System.err.println(e.getMessage());
@@ -695,25 +685,21 @@ public class SubLibraryMain {
 											case 6:
 												try {
 													List<BookInfo> info = service1.getBooksInfo();
-													if (!info.isEmpty() && info != null) {
-														System.out.println(String.format("%-10s %-25s %-25s %-20s %s",
-																"Book-Id", "Book-Name", "Author", "Category",
-																"Publisher"));
-														for (BookInfo BookInfo : info) {
+													System.out.println(
+															"<----------------------------------------------------------------->");
+													System.out.println(String.format("%-10s %-10s %-13s %-15s %s",
+															"BookId", "BookName", "BookAuthor", "BookCategory",
+															"BookPublisherName"));
+													for (BookInfo bookBean : info) {
 
-															if (BookInfo != null) {
-																System.out.println(String.format(
-																		"%-10s %-25s %-25s %-20s %s", BookInfo.getBookId(),
-																		BookInfo.getBookName(), BookInfo.getBookAuthor(),
-																		BookInfo.getBookCategory(),
-																		BookInfo.getBookPublisher()));
+														if (bookBean != null) {
 
-															}
+															System.out.println(bookBean.toString());
+														} else {
+															System.out.println(
+																	"-----------------------------------------------");
+															System.out.println("Books info is not presernt");
 														}
-													} else {
-														System.out.println(
-																"-----------------------------------------------");
-														System.err.println("Books info is not present");
 													}
 												} catch (LMSException e) {
 													System.err.println(e.getMessage());
@@ -722,13 +708,13 @@ public class SubLibraryMain {
 											case 7:
 												System.out.println("Enter the Book id to return :");
 												int returnId = scanner.nextInt();
-												System.out.println("Enter userId");
-												int userId = scanner.nextInt();
+												System.out.println("Enter UserInfoId");
+												int UserInfoId = scanner.nextInt();
 												System.out.println("Enter the status of the book");
 												String status = scanner.next();
 												try {
-													if (loginInfo.getUserId() == userId) {
-														boolean returned = service1.returnBook(returnId, userId,
+													if (loginInfo.getUserId() == UserInfoId) {
+														boolean returned = service3.returnBook(returnId, UserInfoId,
 																status);
 														if (returned != false) {
 															System.out.println(
@@ -740,7 +726,7 @@ public class SubLibraryMain {
 															System.out.println("Book is not Returned");
 														}
 													} else {
-														System.out.println("Invalid userId");
+														System.out.println("Invalid UserInfoId");
 													}
 												} catch (LMSException e) {
 													System.err.println(e.getMessage());
@@ -754,10 +740,10 @@ public class SubLibraryMain {
 												String old_Password = scanner.next();
 												System.out.println("Enter the new password");
 												String new_Password = scanner.next();
-												String user_Role = loginInfo.getRole();
+												String UserInfo_Role = loginInfo.getRole();
 												try {
 													boolean updated = service1.updatePassword(id, old_Password,
-															new_Password, user_Role);
+															new_Password, UserInfo_Role);
 													if (updated) {
 														System.out.println(
 																"-----------------------------------------------");
@@ -789,11 +775,9 @@ public class SubLibraryMain {
 								System.out.println("Try logging in again,Press 2 to login");
 							}
 							break;
-
-						case 3:
-							System.out.println("EXIT");
-							System.exit(0);
-
+						/*
+						 * case 3: System.out.println("EXIT"); //loginStatus = false; break;
+						 */
 						default:
 							break;
 						}
