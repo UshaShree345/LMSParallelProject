@@ -113,7 +113,7 @@ public class LibrarianDAOTest {
 		adn.setEmail("chary@gmail.com");
 		adn.setPassword("Chary@123");
 		boolean status=dao.registerLibrarian(adn);
-		Assertions.assertTrue(status);
+		Assertions.assertFalse(status);
 	}
 	@Test
 	public void testRemoveBook1() {
@@ -137,7 +137,7 @@ public class LibrarianDAOTest {
 	}
 	@Test
 	public void testAuthenticateBook1() {
-		LibrarianInfo status = dao.authenticateLibrarian("usha@gmail.com", "Usha@123");
+		LibrarianInfo status = dao.authenticateLibrarian("aravind@gmail.com", "Usha@123");
 		Assertions.assertNotNull(status);
 	}
 	@Test
