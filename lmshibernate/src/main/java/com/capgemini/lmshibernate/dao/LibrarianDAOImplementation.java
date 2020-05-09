@@ -21,19 +21,19 @@ import com.capgemini.lmshibernate.exception.LMSException;
 
 public class LibrarianDAOImplementation implements LibrarianDAO {
 
-private EntityManagerFactory factory = Persistence.createEntityManagerFactory("TestPersistence");
-	
+    EntityManagerFactory factory = null;
 	EntityManager manager = null;
 	EntityTransaction transaction = null;
 	int noOfBooks;
 	@Override
-	public boolean addBook(BookInfo bookDetail) {
+	public boolean addBook(BookInfo book) {
 		
 		try {
+			factory = Persistence.createEntityManagerFactory("TestPersistence");
 			manager = factory.createEntityManager();
 			transaction = manager.getTransaction();
 			transaction.begin();
-			manager.persist(bookDetail);
+			manager.persist(book);
 			transaction.commit();
 			return true;
 		} catch (Exception e) {
@@ -50,6 +50,7 @@ private EntityManagerFactory factory = Persistence.createEntityManagerFactory("T
 	public boolean removeBook(int bookId) {
 		
 		try {
+			factory = Persistence.createEntityManagerFactory("TestPersistence");
 			manager = factory.createEntityManager();
 			transaction = manager.getTransaction();
 			transaction.begin();
@@ -71,6 +72,7 @@ private EntityManagerFactory factory = Persistence.createEntityManagerFactory("T
 	public boolean updateBook(BookInfo book) {
 
 		try {
+			factory = Persistence.createEntityManagerFactory("TestPersistence");
 			manager = factory.createEntityManager();
 			transaction = manager.getTransaction();
 			transaction.begin();
@@ -89,19 +91,20 @@ private EntityManagerFactory factory = Persistence.createEntityManagerFactory("T
 	}
 
 	@Override
-	public boolean issueBook(int bookId, int id) {
+	public boolean issueBook(int bookId, int userId) {
 		try {
+			factory = Persistence.createEntityManagerFactory("TestPersistence");
 			manager = factory.createEntityManager();
 			transaction = manager.getTransaction();
 			String jpql = "select b from BookInfo b where b.bookId=:bookId";
 			TypedQuery<BookInfo> query = manager.createQuery(jpql, BookInfo.class);
-			query.setParameter("bId", bookId);
+			query.setParameter("bookId", bookId);
 			BookInfo rs = query.getSingleResult();
 			if (rs != null) {
-				String jpql1 = "select r from BookRequestInfo r where r.uId=:uId and r.bookId=:bookId";
+				String jpql1 = "select r from BookRequestInfo r where r.userId=:userId and r.bookId=:bookId";
 				TypedQuery<BookRequestInfo> query1 = manager.createQuery(jpql1, BookRequestInfo.class);
 				//
-				query1.setParameter("id", id);
+				query1.setParameter("userId", userId);
 				query1.setParameter("bookId", bookId);
 				List<BookRequestInfo> rs1 = query1.getResultList();
 				if (!rs1.isEmpty() && rs1 != null) {
@@ -112,7 +115,7 @@ private EntityManagerFactory factory = Persistence.createEntityManagerFactory("T
 					cal.add(Calendar.DAY_OF_MONTH, 7);
 					String returnDate = sdf.format(cal.getTime());
 					BookIssueInfo issueBook = new BookIssueInfo();
-					issueBook.setId(id);
+					issueBook.setUserId(userId);
 					issueBook.setBookId(bookId);
 					issueBook.setIssueDate(java.sql.Date.valueOf(issueDate));
 					issueBook.setReturnDate(java.sql.Date.valueOf(returnDate));
@@ -122,11 +125,11 @@ private EntityManagerFactory factory = Persistence.createEntityManagerFactory("T
 						transaction.begin();
 						Query bookName = manager
 								.createQuery("select b.bookName from BookInfo b where b.bookId=:bookId");
-						bookName.setParameter("bId", bookId);
+						bookName.setParameter("bookId", bookId);
 						List book = bookName.getResultList();
 						BookBorrowedInfo borrowedBooks = new BookBorrowedInfo();
 						//
-						borrowedBooks.setId(id);
+						borrowedBooks.setUserId(userId);
 						borrowedBooks.setBookId(bookId);
 						borrowedBooks.setBookName(book.get(0).toString());
 						manager.persist(borrowedBooks);
@@ -155,6 +158,7 @@ private EntityManagerFactory factory = Persistence.createEntityManagerFactory("T
 	@Override
 	public List<BookRequestInfo> showRequests() {
 		
+		factory = Persistence.createEntityManagerFactory("TestPersistence");
 		manager = factory.createEntityManager();
 		String jpql = "select r from BookRequestInfo r";
 		TypedQuery<BookRequestInfo> query = manager.createQuery(jpql, BookRequestInfo.class);
@@ -179,6 +183,7 @@ private EntityManagerFactory factory = Persistence.createEntityManagerFactory("T
 
 	@Override
 	public List<UserInfo> showUsers() {
+		factory = Persistence.createEntityManagerFactory("TestPersistence");
 		manager = factory.createEntityManager();
 		String jpql = "select u from UserInfo u";
 		TypedQuery<UserInfo> query = manager.createQuery(jpql, UserInfo.class);
@@ -190,7 +195,8 @@ private EntityManagerFactory factory = Persistence.createEntityManagerFactory("T
 
 	@Override
 	public LinkedList<Integer> bookHistoryDetails(int id) {
-
+		
+		factory = Persistence.createEntityManagerFactory("TestPersistence");
 		int count = 0;
 		manager = factory.createEntityManager();
 		String jpql = "select b from BookIssue b";

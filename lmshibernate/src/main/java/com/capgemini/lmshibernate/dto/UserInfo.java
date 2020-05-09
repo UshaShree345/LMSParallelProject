@@ -1,5 +1,8 @@
 package com.capgemini.lmshibernate.dto;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -72,15 +75,19 @@ public class UserInfo {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	@Override
+	public String toString() {
+		return String.format("%-10s %-10s %-10s %-15s %-10s %-13s %s", userId, firstName, lastName, email, password, mobile, role);
+	}
+	
 	/*
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "users")
+	private List<BookIssueInfo> issueDetails;
 
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "users")
-	private List<BookIssueDetails> issueDetails;
-
+	private List<BookRequestInfo> requests;
+	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "users")
-	private List<RequestDetails> requests;
-
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "users")
-	private List<BorrowedBooks> borrowed;
+	private List<BookBorrowedInfo> borrowed;
 	 */
 }

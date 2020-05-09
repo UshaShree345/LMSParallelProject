@@ -61,6 +61,11 @@ public class BookIssueInfo implements Serializable {
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
+	@Override
+	public String toString() {
+		return String.format("%-10s %-10s %-10s %-13s %s", id, userId, bookId, issueDate, returnDate);
+	}
+	
 	
 	
 }

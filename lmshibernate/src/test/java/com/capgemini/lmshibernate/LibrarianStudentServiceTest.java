@@ -96,7 +96,7 @@ private LibrarianStudentService service = new LibrarianStudentServiceImplementat
 	}
 	@Test
 	public void testUpdatePassword1() {
-		boolean status = service.updatePassword(8521, "shivakumar", "Shiv123@", "librarian");
+		boolean status = service.updatePassword(1234, "shivakumar", "Shiv123@", "librarian");
 		Assertions.assertTrue(status);
 	}
 

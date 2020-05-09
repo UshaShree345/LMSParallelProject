@@ -54,6 +54,12 @@ public class BookBorrowedInfo implements Serializable {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
+	@Override
+	public String toString() {
+		return String.format("%-10s %-10s %s", userId, bookId, bookName);
+	}
+	
+	
 	    
 	
 }

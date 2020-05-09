@@ -19,50 +19,51 @@ import com.capgemini.lmshibernate.exception.LMSException;
 
 public class StudentDAOImplementation implements StudentDAO {
 
-	private EntityManagerFactory factory = Persistence.createEntityManagerFactory("TestPersistence");
+	private EntityManagerFactory factory;
 	EntityManager manager = null;
 	EntityTransaction transaction = null;
 	int noOfBooks;
 
 	@Override
-	public boolean request(int bookId, int id) {
+	public boolean request(int userId, int bookId) {
 
 		int count = 0;
 		try {
+			factory = Persistence.createEntityManagerFactory("TestPersistence");
 			manager = factory.createEntityManager();
 			transaction = manager.getTransaction();
 			String jpql = "select b from BookInfo b where b.bookId=:bookId";
 			TypedQuery<BookInfo> query = manager.createQuery(jpql, BookInfo.class);
-			query.setParameter("bId", bookId);
+			query.setParameter("bookId", bookId);
 			List rs = query.getResultList();
 			if (rs != null) {
-				String jpql1 = "select b from BookBorrowedInfo b where b.id=:id and b.bookId=:bookId";
+				String jpql1 = "select b from BookBorrowedInfo b where b.userId=:userId and b.bookId=:bookId";
 				TypedQuery<BookBorrowedInfo> query1 = (TypedQuery<BookBorrowedInfo>) manager.createQuery(jpql1,
 						BookBorrowedInfo.class);
 				//
-				query1.setParameter("Id", id);
-				query1.setParameter("bId", bookId);
+				query1.setParameter("userId", userId);
+				query1.setParameter("bookId", bookId);
 				List rs1 = query1.getResultList();
 				if (rs1.isEmpty() || rs1 == null) {
-					String jpql2 = "select b from BookIssueInfo b where b.id=:id";
+					String jpql2 = "select b from BookIssueInfo b where b.userId=:userId";
 					TypedQuery<BookIssueInfo> query2 = (TypedQuery<BookIssueInfo>) manager.createQuery(jpql2, BookIssueInfo.class);
-					query2.setParameter("id", id);
+					query2.setParameter("userId", userId);
 					List<BookIssueInfo> rs2 = query2.getResultList();
 					for (BookIssueInfo p : rs2) {
 						noOfBooks = count++;
 					}
 					if (noOfBooks < 3) {
 						Query bookName = manager
-								.createQuery("select b.bookName from BookInfo b where b.bookId=:bookId");
-						bookName.setParameter("bookId", bookId);
+								.createQuery("select b.bookName from BookInfo b where b.bookId=:b_Id");
+						bookName.setParameter("b_Id", bookId);
 						List book = bookName.getResultList();
-						Query email = manager.createQuery("select u.email from User u where u.id=:id");
-						email.setParameter("id", id);
+						Query email = manager.createQuery("select u.email from UserInfo u where u.userId=:user_Id");
+						email.setParameter("user_Id", userId);
 						List userEmail = email.getResultList();
 						transaction.begin();
 						BookRequestInfo request = new BookRequestInfo();
 						//
-						request.setId(id);
+						request.setUserId(userId);     
 						request.setBookId(bookId);
 						request.setEmail(userEmail.get(0).toString());
 						request.setBookName(book.get(0).toString());
@@ -88,16 +89,13 @@ public class StudentDAOImplementation implements StudentDAO {
 			manager.close();
 			factory.close();
 		}
-
 	}
 
-
-
 	@Override
-	public boolean returnBook(int bookId, int id, String status) {
+	public boolean returnBook(int bookId, int userId, String status) {
 
 		try {
-
+			factory = Persistence.createEntityManagerFactory("TestPersistence");
 			manager = factory.createEntityManager();
 			transaction = manager.getTransaction();
 			String jpql = "select b from BookInfo b where b.bookId=:bookId";
@@ -105,11 +103,11 @@ public class StudentDAOImplementation implements StudentDAO {
 			query.setParameter("bookId", bookId);
 			BookInfo rs = query.getSingleResult();
 			if (rs != null) {
-				String jpql1 = "select b from BookIssueInfo b where b.bookId=:bookId and b.id=:id ";
+				String jpql1 = "select b from BookIssueInfo b where b.bookId=:bookId and b.userId=:userId ";
 				TypedQuery<BookIssueInfo> query1 = manager.createQuery(jpql1, BookIssueInfo.class);
 				query1.setParameter("bookId", bookId);
 				//
-				query1.setParameter("id", id);
+				query1.setParameter("userId", userId);
 				BookIssueInfo rs1 = query1.getSingleResult();
 				if (rs1 != null) {
 					Date issueDate = rs1.getIssueDate();
@@ -126,20 +124,20 @@ public class StudentDAOImplementation implements StudentDAO {
 							manager.remove(rs1);
 							transaction.commit();
 							transaction.begin();
-							String jpql3 = "select b from BookBorrowedInfo b  where b.bookId=:bookId and b.id=:id";
+							String jpql3 = "select b from BookBorrowedInfo b  where b.bookId=:bookId and b.userId=:userId";
 							Query query3 = manager.createQuery(jpql3);
 							query3.setParameter("bookId", bookId);
-							query3.setParameter("id", id);
+							query3.setParameter("userId", userId);
 							BookBorrowedInfo bbb = (BookBorrowedInfo) query3.getSingleResult();
 							// int bbb_Id = bbb.getId();
 							manager.remove(bbb);
 							transaction.commit();
 
 							transaction.begin();
-							String jpql4 = "select r from BookRequestInfo r where r.bookId=:bookId and r.id=:id";
+							String jpql4 = "select r from BookRequestInfo r where r.bookId=:bookId and r.userId=:userId";
 							Query query4 = manager.createQuery(jpql4);
 							query4.setParameter("bookId", bookId);
-							query4.setParameter("id", id);
+							query4.setParameter("userId", userId);
 							BookRequestInfo rdb = (BookRequestInfo) query4.getSingleResult();
 							// int rdb_Id = rdb.getId();
 							manager.remove(rdb);
@@ -155,21 +153,21 @@ public class StudentDAOImplementation implements StudentDAO {
 						transaction.commit();
 
 						transaction.begin();
-						String jpql3 = "select b from BookBorrowedInfo b  where b.bookId=:bId and b.id=:uid";
+						String jpql3 = "select b from BookBorrowedInfo b  where b.bookId=:bookId and b.userId=:userId";
 						Query query3 = manager.createQuery(jpql3);
 						query3.setParameter("bookId", bookId);
 						//
-						query3.setParameter("id", id);
+						query3.setParameter("userId", userId);
 						BookBorrowedInfo bbb = (BookBorrowedInfo) query3.getSingleResult();
 						manager.remove(bbb);
 						transaction.commit();
 
 						transaction.begin();
-						String jpql4 = "select r from BookRequestInfo r where r.bookId=:bookId and r.uId=:uId";
+						String jpql4 = "select r from BookRequestInfo r where r.bookId=:bookId and r.userId=:userId";
 						Query query4 = manager.createQuery(jpql4);
 						query4.setParameter("bookId", bookId);
 						//
-						query4.setParameter("id", id);
+						query4.setParameter("userId", userId);
 						BookRequestInfo rdb = (BookRequestInfo) query4.getSingleResult();
 						// int rdb_Id = rdb.getId();
 						manager.remove(rdb);
@@ -195,14 +193,15 @@ public class StudentDAOImplementation implements StudentDAO {
 	}
 
 	@Override
-	public List<BookBorrowedInfo> borrowedBook(int id) {
+	public List<BookBorrowedInfo> borrowedBook(int userId) {
 
 		try {
+			factory = Persistence.createEntityManagerFactory("TestPersistence");
 			manager = factory.createEntityManager();
-			String jpql = "select b from BookBorrowedInfo b where b.uId=:uId";
+			String jpql = "select b from BookBorrowedInfo b where b.userId=:userId";
 			TypedQuery<BookBorrowedInfo> query = manager.createQuery(jpql, BookBorrowedInfo.class);
 			//
-			query.setParameter("uId", id);
+			query.setParameter("userId", userId);
 			List<BookBorrowedInfo> recordList = query.getResultList();
 			return recordList;
 		} catch (Exception e) {

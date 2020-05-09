@@ -54,7 +54,7 @@ public class LibrarianStudentDAOTest {
 	}
 	@Test
 	public void testUpdatePassword() {
-		boolean status = dao.updatePassword(1234, "Ush@1234", "Usha@1234", "librarian");
+		boolean status = dao.updatePassword(3456, "Ush@1234", "Usha@1234", "librarian");
 		Assertions.assertTrue(status);
 	}
 	@Test
@@ -96,7 +96,7 @@ public class LibrarianStudentDAOTest {
 	}
 	@Test
 	public void testUpdatePassword1() {
-		boolean status = dao.updatePassword(8522, "shivakumar", "Shiv123@", "librarian");
+		boolean status = dao.updatePassword(1234, "shivakumar", "Shiv123@", "librarian");
 		Assertions.assertTrue(status);
 	}
 

@@ -46,6 +46,4 @@ public class LibrarianStudentServiceImplementation implements LibrarianStudentSe
 		return dao.updatePassword(id, password, newPassword, role);
 	}
 	
-	
-
 }
