@@ -11,36 +11,44 @@ import com.capgemini.lmsjdbc.dto.BookBorrowedInfo;
 
 public class StudentDAOTest {
  
-	private StudentDAO dao = new StudentDAOImplementation();
+private StudentDAO dao = new StudentDAOImplementation();
 	
 	@Test
-	public void testRequest() {
-		boolean status = dao.request(852852, 852852);
-		Assertions.assertTrue(status);
+	public void testRequestValid() {
+		boolean check = dao.request(100002, 105);
+		Assertions.assertTrue(check);		
 	}
+	
 	@Test
-	public void testReturnBook() {
-		boolean status = dao.returnBook(1234, 123123, "yes");
-		Assertions.assertTrue(status);
+	public void testRequestInvalid() {
+		boolean check = dao.request(100002, 109);
+		Assertions.assertFalse(check);		
 	}
+	
 	@Test
-	public void testBorrowedBook() {
-		List<BookBorrowedInfo> info = dao.borrowedBook(159753);
+	public void testBookBorrowedInfoValid() {
+		List<BookBorrowedInfo> info = dao.borrowedBook(100002);
 		Assertions.assertNotNull(info);
+		Assertions.assertEquals(1, info.size());
 	}
+	
 	@Test
-	public void testRequest1() {
-		boolean status = dao.request(852852, 987654);
-		Assertions.assertTrue(status);
-	}
-	@Test
-	public void testReturnBook1() {
-		boolean status = dao.returnBook(123123, 123456, "yes");
-		Assertions.assertTrue(status);
-	}
-	@Test
-	public void testBorrowedBook1() {
-		List<BookBorrowedInfo> info = dao.borrowedBook(741852);
+	public void testBookBorrowedInfoInvalid() {
+		List<BookBorrowedInfo> info = dao.borrowedBook(100002);
 		Assertions.assertNotNull(info);
+		Assertions.assertNotEquals(6, info.size());
 	}
+	
+	@Test
+	public void testReturnBookValid() {
+		boolean check = dao.returnBook(105, 100002, "yes");
+		Assertions.assertTrue(check);
+	}
+	
+	@Test
+	public void testReturnBookInvalid() {
+		boolean check = dao.returnBook(105, 100002, "yes");
+		Assertions.assertFalse(check);
+	}
+
 }

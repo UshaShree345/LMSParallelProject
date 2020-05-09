@@ -18,6 +18,8 @@ public interface QueryMapper {
 	
 	String issueBookQuery3 = "Insert into borrowed_books values(?,?,(select email from users where sid=?))";
 	
+	String requestQuery = "select * from bookbean where bid=?";
+	
 	String requestQuery1 = "select count(*) as sid from borrowed_books where sid=? and bid=? and email=(select email from users where sid=?)";
 	
 	String requestQuery3 = "insert into request_details values(?,(select concat(firstName,'_',lastName) from users where sid=?)"

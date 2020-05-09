@@ -98,6 +98,8 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 			statement.setInt(1, sId);
 			statement.setInt(2, bId);
 			statement.setInt(3, sId);
+			try(PreparedStatement pst = connection.prepareStatement(QueryMapper.requestQuery);) {
+				pst.setInt(1, bId);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
 				try (PreparedStatement pstmt1 = connection.prepareStatement(QueryMapper.issueBookQuery2);) {
@@ -129,6 +131,7 @@ public class LibrarianDAOImplementation implements LibrarianDAO {
 				}
 			} else {
 				throw new LMSException("The respective user have not placed any request");
+			}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

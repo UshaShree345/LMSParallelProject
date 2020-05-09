@@ -1,6 +1,6 @@
 package com.capgemini.lmsjdbc;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,119 +15,127 @@ import com.capgemini.lmsjdbc.service.LibrarianServiceImplementation;
 public class LibrarianServiceTest {
  
 	private LibrarianService service = new LibrarianServiceImplementation();
-
+	
 	@Test
-	public void testAddBook() {
-		BookInfo info = new BookInfo();
-		info.setbId(101010);
-		info.setBookName("javajava");
-		info.setAuthor("jamesgosling");
-		info.setCategory("javaprogramming");
-		info.setPublisher("SunMicroSystem");
-		boolean status = service.addBook(info);
-		Assertions.assertTrue(status);
+	public void testAddBookValid() {
+		BookInfo bean = new BookInfo();
+		bean.setbId(105);
+		bean.setBookName("Java");
+		bean.setAuthor("James");
+		bean.setCategory("Programing");
+		bean.setPublisher("Arihent");
+		boolean check = service.addBook(bean);
+		Assertions.assertTrue(check);
 	}
-
 	@Test
-	public void testRemoveBook() {
-		boolean status = service.removeBook(1234);
-		Assertions.assertTrue(status);
+	public void testAddBookInvalid() {
+		BookInfo bean = new BookInfo();
+		bean.setbId(105);
+		bean.setBookName("Java");
+		bean.setAuthor("James");
+		bean.setCategory("Programing");
+		bean.setPublisher("Arihent");
+		boolean check = service.addBook(bean);
+		Assertions.assertFalse(check);	
+	} 
+	
+	@Test
+	public void testRemoveBookValid() {
+		boolean check = service.removeBook(105);
+		Assertions.assertTrue(check);
 	}
-
+	
 	@Test
-	public void testUpdateBook() {
-		BookInfo info = new BookInfo();
-		info.setbId(123458);
-		info.setBookName("jdbc");
-		boolean status = service.updateBook(info);
-		Assertions.assertTrue(status);
+	public void testRemoveBookInvalid() {
+		boolean check = service.removeBook(107);
+		Assertions.assertFalse(check);
 	}
-
+	
 	@Test
-	public void testIssueBook() {
-		boolean status = service.issueBook(123123, 102102);
-		Assertions.assertTrue(status);
+	public void testUpdateBookValid() {
+		BookInfo book = new BookInfo();
+		book.setbId(104);
+		book.setBookName("Maths");
+		boolean check = service.updateBook(book);
+		Assertions.assertTrue(check);
 	}
-
+	
 	@Test
-	public void testBookHistroyDetails() {
-		ArrayList<BookIssueInfo> info = service.bookHistoryDetails(102102);
+	public void testUpdateBookInvalid() {
+		BookInfo book = new BookInfo();
+		book.setbId(109);
+		book.setBookName("Maths");
+		boolean check = service.updateBook(book);
+		Assertions.assertFalse(check);
+	}
+	
+	@Test
+	public void testIssueBookValid() {
+		boolean check = service.issueBook(105, 100002);
+		Assertions.assertTrue(check);
+	}
+	
+	@Test
+	public void testIssueBookInvalid() {
+		boolean check = service.issueBook(109, 100002);
+		Assertions.assertFalse(check);
+	}
+	
+	@Test
+	public void testBookHistoryDetailsValid() {
+		List<BookIssueInfo> info = service.bookHistoryDetails(100002);
 		Assertions.assertNotNull(info);
+		Assertions.assertEquals(1, info.size());		
 	}
-
+	
 	@Test
-	public void testShowRequests() {
-		ArrayList<BookRequestInfo> info = service.showRequests();
+	public void testBookHistoryDetailsInvalid() {
+		List<BookIssueInfo> info = service.bookHistoryDetails(100003);
 		Assertions.assertNotNull(info);
+		Assertions.assertNotEquals(0, info.size());		
 	}
-
+	
 	@Test
-	public void testShowIssuedBooks() {
-		ArrayList<BookIssueInfo> info = service.showIssuedBooks();
+	public void testShowRequestsValid() {
+		List<BookRequestInfo> info = service.showRequests();
 		Assertions.assertNotNull(info);
+		Assertions.assertEquals(1, info.size());		
 	}
-
+	
 	@Test
-	public void testShowUsers() {
-		ArrayList<UserInfo> info = service.showUsers();
+	public void testShowRequestsInvalid() {
+		List<BookRequestInfo> info = service.showRequests();
 		Assertions.assertNotNull(info);
+		Assertions.assertNotEquals(2, info.size());		
 	}
-
+	
 	@Test
-	public void testAddBook1() {
-		BookInfo info = new BookInfo();
-		info.setbId(101010);
-		info.setBookName("javajava");
-		info.setAuthor("jamesgosling");
-		info.setCategory("javaprogramming");
-		info.setPublisher("SunMicroSystem");
-		boolean status = service.addBook(info);
-		Assertions.assertFalse(status);
-	}
-
-	@Test
-	public void testRemoveBook1() {
-		boolean status = service.removeBook(1234);
-		Assertions.assertFalse(status);
-	}
-
-	@Test
-	public void testUpdateBook1() {
-		BookInfo info = new BookInfo();
-		info.setbId(123458);
-		info.setBookName("jdbc");
-		boolean status = service.updateBook(info);
-		Assertions.assertFalse(status);
-	}
-
-	@Test
-	public void testIssueBook1() {
-		boolean status = service.issueBook(123123, 102102);
-		Assertions.assertFalse(status);
-	}
-
-	@Test
-	public void testBookHistroyDetails1() {
-		ArrayList<BookIssueInfo> info = service.bookHistoryDetails(123456);
+	public void testShowIssuedBooksValid() {
+		List<BookIssueInfo> info = service.showIssuedBooks();
 		Assertions.assertNotNull(info);
+		Assertions.assertEquals(1, info.size());		
+	}
+	
+	@Test
+	public void testShowIssuedBooksInvalid() {
+		List<BookIssueInfo> info = service.showIssuedBooks();
+		Assertions.assertNotNull(info);
+		Assertions.assertNotEquals(2, info.size());		
+	}
+	
+	@Test
+	public void testShowUsersValid() {
+		List<UserInfo> info = service.showUsers();
+		Assertions.assertNotNull(info);
+		Assertions.assertEquals(4, info.size());		
+	}
+	
+	@Test
+	public void testShowUsersInvalid() {
+		List<UserInfo> info = service.showUsers();
+		Assertions.assertNotNull(info);
+		Assertions.assertNotEquals(2, info.size());		
 	}
 
-	@Test
-	public void testShowRequests1() {
-		ArrayList<BookRequestInfo> info = service.showRequests();
-		Assertions.assertNotNull(info);
-	}
-
-	@Test
-	public void testShowIssuedBooks1() {
-		ArrayList<BookIssueInfo> info = service.showIssuedBooks();
-		Assertions.assertNotNull(info);
-	}
-
-	@Test
-	public void testShowUsers1() {
-		ArrayList<UserInfo> info = service.showUsers();
-		Assertions.assertNotNull(info);
-	}
 
 }
