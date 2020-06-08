@@ -1,0 +1,38 @@
+<div class="col-md-6 offset-5 mt-4 mb-3">
+    <div class="card text-white bg-dark mb-3" style="max-width: 16rem;">
+      <div class="card-body">
+      <h5 class="text-center"><b>Search book by Id</b></h5>
+      </div>
+    </div>
+    </div> 
+<div class="col-md-6 offset-5 mt-4 mb-3">
+<form class="form-inline my-2 my-lg-0 " style="float:left;" >
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)='getBooksById(this.bookbean)'>Search</button>
+</form>
+</div>
+<br>
+<div class="container mt-4">
+    <table class="table table-hover table-bordered">
+        <thead class="thead-light">
+            <tr class="table-warning">
+                <th class="table-secondary">Book ID</th>
+                <th class="table-secondary">Book Name</th>
+                <th class="table-secondary">Author</th>
+                <th class="table-secondary">Category</th>
+                <th class="table-secondary">Publisher</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-warning" *ngFor='let book of books'>
+                <td class="table-dark">{{book.bId}}</td>
+                <td class="table-dark">{{book.bookName}}</td>
+                <td class="table-dark">{{book.author}}</td>
+                <td class="table-dark">{{book.category}}</td>
+                <td class="table-dark">{{book.publisher}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

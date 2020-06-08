@@ -1,0 +1,39 @@
+<div class="alert alert-success" *ngIf='message' {{ message }}></div>
+<div class="col-md-6 offset-5 mt-4 mb-3">
+    <div class="card text-white bg-dark mb-3" style="max-width: 16rem;">
+      <div class="card-body">
+      <h5 class="text-center"><b>Issue Book</b></h5>
+      </div>
+    </div>
+    </div> 
+
+    <div class="container mt-4">
+      <table class="table table-hover table-bordered">
+          <thead class="thead-dark">
+              <tr class="table-dark">
+                  <th>Sl.No</th>
+                  <th>ID</th>
+                  <th>User Id</th>
+                  <th>Book Id</th>
+                  <th>Email</th>
+                  <th>Book Name</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr class="table-light" *ngFor='let detail of details; index as i'>
+                  <td>{{i+1}}</td>
+                  <td>{{detail.id}}</td>
+                  <td>{{detail.uId}}</td>
+                  <td>{{detail.bookId}}</td>
+                  <td>{{detail.email}}</td>
+                  <td>{{detail.bookName}}</td>
+                  <td>
+                      <button class="btn btn-dark" (click)='bookIssue(detail)'>Issue</button>
+                  </td>
+              </tr>
+  
+          </tbody>
+      </table>
+  
+  </div>

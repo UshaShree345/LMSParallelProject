@@ -1,0 +1,47 @@
+<div class="alert alert-success" *ngIf='message' {{ message }}></div>
+<div class="col-md-6 offset-5 mt-4 mb-3">
+    <div class="card text-white bg-dark mb-3" style="max-width: 16rem;">
+        <div class="card-body">
+            <h5 class="text-center"><b>Books Info</b></h5>
+        </div>
+    </div>
+</div>
+<div class="col-md-4 offset-md-4 mt-3 mb-3">
+    <input type="search" name="search" placeholder="enter bookname or author or category" [(ngModel)]='search'
+        class="form-control">
+</div>
+<div class="container mt-4">
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr class="thead-dark">
+                <th>SNo.</th>
+                <th>Book ID</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Publisher</th>
+                <th>Copies</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-light" *ngFor='let books of book | filter: search ; index as i'>
+                <td>{{i+1}}</td>
+                <td>{{books.bookId}}</td>
+                <td>{{books.bookName}}</td>
+                <td>{{books.authorName}}</td>
+                <td>{{books.publisherName}}</td>
+                <td>{{books.copies}}</td>
+                <td>{{books.bookCategory}}</td>
+
+                <td><button type="submit" class="btn btn-danger btn-sm" (click)="deleteBook(books.bookId)"
+                        style="margin-right: 20px;"><span style="font-size: 20px;"><i
+                                class="fas fa-trash"></i></span></button>
+                    <button type="submit" class="btn btn-success btn-sm" (click)="selectBook(books)"><span
+                            style="font-size: 20px;"><i class="far fa-edit"></i></span></button></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

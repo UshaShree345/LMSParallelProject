@@ -1,0 +1,36 @@
+<div class="col-md-6 offset-5 mt-4 mb-3">
+    <div class="card text-white bg-dark mb-3" style="max-width: 16rem;">
+        <div class="card-body">
+            <h5 class="text-center"><b>Issued Books</b></h5>
+        </div>
+    </div>
+</div>
+ <div class="container mt-4">
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr class="thead-dark">
+                <th>SL.No</th>
+                <th>User Id</th>
+                <th>User Mail Id</th>
+                <th>Book Id</th>
+                <th>Book Name</th>
+                <th>Issue Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="thead-light"*ngFor='let issues of issue; index as i'>
+                <td>{{i+1}}</td>
+                <!-- <td>{{issues.id}}</td> -->
+                <td>{{issues.uId}}</td>
+                <td>{{issues.userMailId}}</td>
+                <td>{{issues.bookId}}</td>
+                <td>{{issues.bookName}}</td>
+                <td>{{issues.issueDate}}</td>
+                <td>{{issues.returnDate}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+

@@ -1,0 +1,87 @@
+<div id="example">
+  <div id="example2">
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class="col-md-6 offset-5 mt-4 mb-3">
+  <div class="card text-white bg-dark mb-3" style="max-width: 16rem;">
+    <div class="card-body">
+      <h4 class="text-center"><b>Update Book</b></h4>
+    </div>
+  </div>
+</div>
+
+<div class="card col-md-4 offset-md-4 mt-4">
+  <form #editBookForm='ngForm' (ngSubmit)='editBook(editBookForm)'>
+
+    <div class="form-group mt-4">
+      <label class="sr-only" for="authorName">BookId</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><span>BookId</span></div>
+        </div>
+        <input type="number" class="form-control form-control-lg" id="bookId" readonly #bookId='ngModel'
+        [(ngModel)]='bookToBeUpdated.bookId' name="bookId">
+      </div>
+    </div>
+
+    <div class="form-group mt-4">
+      <label class="sr-only" for="bookName">BookName</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><span>BookName</span></div>
+        </div>
+        <input type="text" class="form-control form-control-lg" id="bookName" #bookName='ngModel' [(ngModel)]='bookToBeUpdated.bookName'
+        name="bookName">
+      </div>
+    </div>
+    
+    <div class="form-group mt-4">
+      <label class="sr-only" for="authorName">Author</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><span>Author</span></div>
+        </div>
+        <input type="text" class="form-control form-control-lg" id="authorName" name="authorName" #authorName='ngModel'
+        [(ngModel)]='bookToBeUpdated.authorName'>
+      </div>
+    </div>
+    
+    <div class="form-group mt-4">
+      <label class="sr-only" for="bookCategory">Category</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><span>Category</span></div>
+        </div>
+        <input type="text" class="form-control form-control-lg" id="bookCategory" name="bookCategory" #bookCategory='ngModel'
+        [(ngModel)]='bookToBeUpdated.bookCategory'>
+      </div>
+    </div>
+    
+    <div class="form-group mt-4">
+      <label class="sr-only" for="copies">Copies</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><span>Copies</span></div>
+        </div>
+        <input type="number" class="form-control form-control-lg" id="copies" #copies='ngModel' [(ngModel)]='bookToBeUpdated.copies'
+        name="copies">
+      </div>
+    </div>
+
+    <div class="form-group mt-4">
+      <label class="sr-only" for="publisherName">Publisher</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><span>Publisher</span></div>
+        </div>
+        <input type="text" class="form-control form-control-lg" id="publisherName" #publisherName='ngModel'
+        [(ngModel)]='bookToBeUpdated.publisherName' name="publisherName">
+      </div>
+    </div>
+    <div class="text-center">
+    <button type="submit" class="btn btn-dark btn-lg btn-block" >Edit Book</button>
+    </div>
+    <br>
+  </form>
+</div>
+</div>
+</div>

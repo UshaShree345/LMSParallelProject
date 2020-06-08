@@ -1,0 +1,44 @@
+<div class="alert alert-success" *ngIf='message'>{{ message }}</div>
+<div class="alert alert-danger" *ngIf='error'>{{ error }}</div>
+<div class="col-md-6 offset-5 mt-4 mb-3">
+  <div class="card text-white bg-dark mb-3" style="max-width: 16rem;">
+    <div class="card-body">
+      <h5 class="text-center"><b>Request Book</b></h5>
+    </div>
+  </div>
+</div>
+<div class="col-md-4 offset-md-4 mt-3 mb-3">
+  <input type="search" name="search" [(ngModel)]='search' class="form-control" placeholder="Search Here For A Book">
+</div>
+<div class="container mt-4">
+  <table class="table table-hover table-bordered">
+    <thead class="thead-dark">
+      <tr class="thead-dark">
+        <th>SL.No</th>
+        <th>BookId</th>
+        <th>BookName</th>
+        <th>AuthorName</th>
+        <th>BookCategory</th>
+        <th>Copies</th>
+        <th>PublisherName</th>
+        <th>Request</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-light" *ngFor='let books of book | filter: search ; index as i'>
+        <td>{{i + 1}}</td>
+        <td>{{books.bookId}}</td>
+        <td>{{books.bookName}}</td>
+        <td>{{books.authorName}}</td>
+        <td>{{books.bookCategory}}</td>
+        <td>{{books.copies}}</td>
+        <td>{{books.publisherName}}</td>
+        <td>
+          <button class="btn btn-dark" (click)='userRequest(books.bookId)'>
+            Request
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

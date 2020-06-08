@@ -1,0 +1,12 @@
+ .centered {
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} 
+
+.text-center{
+  font-size: 150%;
+}
+
+/* a.ex2:hover, a.ex2:active {font-size: 150%;} */

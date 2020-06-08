@@ -1,0 +1,25 @@
+.navbar-custom {
+    background-color: #0f0501;
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255,255,255,.8);
+    margin: 5px;
+    font-size: 22px;
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+}
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+.navbar-ul{
+    font-size: 18px;
+}
+
+a:hover {
+    background-color: darkgray;
+    border-radius: 20px;
+  }

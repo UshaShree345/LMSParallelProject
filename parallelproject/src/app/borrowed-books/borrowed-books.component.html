@@ -1,0 +1,30 @@
+<div class="col-md-6 offset-5 mt-4 mb-3">
+    <div class="card text-white bg-dark mb-3" style="max-width: 16rem;">
+      <div class="card-body">
+      <h5 class="text-center"><b>Borrowed Books</b></h5>
+      </div>
+    </div>
+    </div> 
+<div class="container mt-4">
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr class="table-dark">
+                <th class="table-success">ID</th>
+                <th class="table-success">User Id</th>
+                <th class="table-success">Book Id</th>
+                <th class="table-success">Book Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-warning" *ngFor='let borrow of borrows'>
+                <td class="table-success">{{borrow.id}}</td>
+                <td class="table-success">{{borrow.uId}}</td>
+                <td class="table-success">{{borrow.bId}}</td>
+                <td class="table-success">{{borrow.bookName}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
